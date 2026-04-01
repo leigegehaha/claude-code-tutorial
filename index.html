@@ -20,6 +20,7 @@
     <div class="nav-sec">快速开始</div>
     <div class="nav-item active" data-target="hero"><span class="nav-ic">🏠</span> 首页概览</div>
     <div class="nav-item" data-target="install"><span class="nav-ic">⬇️</span> 安装与环境</div>
+    <div class="nav-item" data-target="tool-comparison"><span class="nav-ic">📊</span> 三大工具对比</div>
     <div class="nav-sec">🌱 入门篇</div>
     <div class="nav-item" data-target="basic-commands"><span class="nav-ic">💬</span> 基础命令</div>
     <div class="nav-item" data-target="first-task"><span class="nav-ic">🚀</span> 第一个任务</div>
@@ -121,6 +122,321 @@ cd my-project
 # 启动 Claude Code（首次使用需登录）
 claude</div></div>
     <div class="tip"><strong>💡 提示：</strong>也可以在 VS Code 扩展商店搜索 "Claude Code" 安装插件，或下载 Desktop 桌面版。</div>
+  </div>
+</section>
+
+<!-- ===================== TOOL COMPARISON ===================== -->
+<section class="section" id="tool-comparison">
+  <h2 class="section-title">📊 三大终端 AI 编程工具对比 <span class="badge badge-beginner">入门</span></h2>
+  <div class="sub">
+    <h3>为什么要对比？</h3>
+    <p>2025-2026 年，终端 AI 编程工具爆发式增长。本文重点对比三款最具代表性的工具：<strong>Claude Code</strong>（Anthropic）、<strong>OpenAI Codex CLI</strong>（OpenAI）和 <strong>OpenCode</strong>（开源社区）。它们各有特色，适合不同的开发场景。了解它们的区别，能帮你做出最适合自己的选择。</p>
+    <!-- SVG: Three tools overview -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+        <!-- Claude Code -->
+        <rect x="20" y="20" width="200" height="140" rx="12" fill="rgba(217,119,6,.08)" stroke="#d97706" stroke-width="2"/>
+        <text x="120" y="52" text-anchor="middle" fill="#f59e0b" font-size="15" font-weight="700">Claude Code</text>
+        <text x="120" y="72" text-anchor="middle" fill="#8b949e" font-size="10">Anthropic · 2025.2</text>
+        <rect x="40" y="85" width="160" height="22" rx="5" fill="#161b22" stroke="#d97706" stroke-width="1"/>
+        <text x="120" y="100" text-anchor="middle" fill="#f59e0b" font-size="10">🔥 深度推理 · 准确优先</text>
+        <rect x="40" y="113" width="160" height="22" rx="5" fill="#161b22" stroke="#d97706" stroke-width="1"/>
+        <text x="120" y="128" text-anchor="middle" fill="#d97706" font-size="10">SWE-bench: 80.8%</text>
+        <!-- OpenAI Codex -->
+        <rect x="250" y="20" width="200" height="140" rx="12" fill="rgba(88,166,255,.08)" stroke="#58a6ff" stroke-width="2"/>
+        <text x="350" y="52" text-anchor="middle" fill="#58a6ff" font-size="15" font-weight="700">OpenAI Codex CLI</text>
+        <text x="350" y="72" text-anchor="middle" fill="#8b949e" font-size="10">OpenAI · 2025.4</text>
+        <rect x="270" y="85" width="160" height="22" rx="5" fill="#161b22" stroke="#58a6ff" stroke-width="1"/>
+        <text x="350" y="100" text-anchor="middle" fill="#58a6ff" font-size="10">⚡ 速度优先 · 开源 CLI</text>
+        <rect x="270" y="113" width="160" height="22" rx="5" fill="#161b22" stroke="#58a6ff" stroke-width="1"/>
+        <text x="350" y="128" text-anchor="middle" fill="#58a6ff" font-size="10">SWE-bench: 64.7%</text>
+        <!-- OpenCode -->
+        <rect x="480" y="20" width="200" height="140" rx="12" fill="rgba(63,185,80,.08)" stroke="#3fb950" stroke-width="2"/>
+        <text x="580" y="52" text-anchor="middle" fill="#3fb950" font-size="15" font-weight="700">OpenCode</text>
+        <text x="580" y="72" text-anchor="middle" fill="#8b949e" font-size="10">开源社区 · 2025</text>
+        <rect x="500" y="85" width="160" height="22" rx="5" fill="#161b22" stroke="#3fb950" stroke-width="1"/>
+        <text x="580" y="100" text-anchor="middle" fill="#3fb950" font-size="10">🆓 多模型 · 完全免费</text>
+        <rect x="500" y="113" width="160" height="22" rx="5" fill="#161b22" stroke="#3fb950" stroke-width="1"/>
+        <text x="580" y="128" text-anchor="middle" fill="#3fb950" font-size="10">已归档 → Crush</text>
+      </svg>
+      <div class="svg-caption">三款主流终端 AI 编程工具：各自擅长的领域不同</div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>全面对比总览</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>维度</th><th>Claude Code</th><th>OpenAI Codex CLI</th><th>OpenCode</th></tr></thead>
+      <tbody>
+        <tr><td><strong>开发商</strong></td><td>Anthropic</td><td>OpenAI</td><td>开源社区（Charmbracelet）</td></tr>
+        <tr><td><strong>发布时间</strong></td><td>2025 年 2 月</td><td>2025 年 4 月</td><td>2025 年初</td></tr>
+        <tr><td><strong>许可证</strong></td><td>闭源（专有）</td><td>开源（Apache 2.0）</td><td>开源（MIT）</td></tr>
+        <tr><td><strong>底层模型</strong></td><td>Claude Opus 4.6 / Sonnet 4.6</td><td>GPT-5.4 / GPT-5.3-Codex</td><td>多模型（Claude/GPT/Gemini 等）</td></tr>
+        <tr><td><strong>工作流哲学</strong></td><td>交互式 · 开发者在环</td><td>异步委派 · 事后审查</td><td>轻量交互 · 多模型切换</td></tr>
+        <tr><td><strong>运行环境</strong></td><td>本地优先（CLI/IDE/Desktop）</td><td>云端优先 + CLI</td><td>纯本地终端</td></tr>
+        <tr><td><strong>安装方式</strong></td><td><code>npm install -g @anthropic-ai/claude-code</code></td><td><code>npm install -g @openai/codex</code></td><td><code>brew install opencode-ai/tap/opencode</code></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="sub">
+    <h3>价格对比（2026 年 3 月）</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>方案</th><th>Claude Code</th><th>OpenAI Codex</th><th>OpenCode</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>入门</strong></td>
+          <td>$20/月（Pro）</td>
+          <td>$20/月（ChatGPT Plus）</td>
+          <td><strong>免费</strong>（开源）</td>
+        </tr>
+        <tr>
+          <td><strong>进阶</strong></td>
+          <td>$100/月（Max 5x）</td>
+          <td>$200/月（ChatGPT Pro）</td>
+          <td>免费 + 自付 API 费用</td>
+        </tr>
+        <tr>
+          <td><strong>重度</strong></td>
+          <td>$200/月（Max 20x）</td>
+          <td>Business（定制价格）</td>
+          <td>免费 + 自付 API 费用</td>
+        </tr>
+        <tr>
+          <td><strong>团队</strong></td>
+          <td>$150/用户/月（Teams）</td>
+          <td>Enterprise（定制价格）</td>
+          <td>免费（自部署）</td>
+        </tr>
+        <tr>
+          <td><strong>API 计费</strong></td>
+          <td>Opus $5/$25 · Sonnet $3/$15（每百万 Token）</td>
+          <td>约 $0.01-0.12/1K Token</td>
+          <td>取决于所选模型</td>
+        </tr>
+      </tbody>
+    </table></div>
+    <div class="tip"><strong>💡 实际花费提示：</strong>Claude Code Pro（$20/月）可能产生超额费，重度使用时实际花费可能超 $100/月。OpenAI Codex 按「信用点」计费（5小时窗口滚动刷新），Plus 计划每 5 小时约 33-168 条消息。OpenCode 本身免费，但你需自行支付各模型的 API 费用。</div>
+  </div>
+
+  <div class="sub">
+    <h3>核心能力 Benchmarks</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>基准测试</th><th>Claude Code</th><th>OpenAI Codex</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>SWE-bench Verified</strong></td>
+          <td><span style="color:#3fb950;font-weight:700">80.8%</span></td>
+          <td>64.7%</td>
+          <td>真实 GitHub Issue 修复能力，越高越好</td>
+        </tr>
+        <tr>
+          <td><strong>Terminal-Bench 2.0</strong></td>
+          <td>65.4%</td>
+          <td><span style="color:#3fb950;font-weight:700">77.3%</span></td>
+          <td>终端调试能力，Codex 更擅长</td>
+        </tr>
+        <tr>
+          <td><strong>Token 效率</strong></td>
+          <td>标准（深度推理消耗大）</td>
+          <td><span style="color:#3fb950;font-weight:700">约 3x 更省</span></td>
+          <td>完成相同任务 Codex 约用 1/3 的 Token</td>
+        </tr>
+        <tr>
+          <td><strong>上下文窗口</strong></td>
+          <td>200K Token</td>
+          <td>128K Token</td>
+          <td>Claude Code 可同时阅读更多文件</td>
+        </tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="sub">
+    <h3>各工具深度点评</h3>
+    <div class="accordion">
+      <div class="acc-item open">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>🟠 Claude Code — 深度推理之王</span><span class="arrow">▶</span></div>
+        <div class="acc-body"><div class="acc-inner">
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>维度</th><th>评价</th></tr></thead>
+            <tbody>
+              <tr><td><span style="color:#3fb950">✅ 优势</span></td><td>
+                <ul style="margin:0;padding-left:18px">
+                  <li><strong>最强的代码理解力</strong>：SWE-bench 80.8% 遥遥领先，擅长复杂多文件重构和架构级任务</li>
+                  <li><strong>超长上下文</strong>：200K Token 窗口，可同时理解整个大型代码库</li>
+                  <li><strong>丰富的生态</strong>：Skills 系统、Hooks 钩子、MCP 协议、插件市场，扩展性极强</li>
+                  <li><strong>精细化权限控制</strong>：6 种权限模式 + allow/deny 规则，安全性优秀</li>
+                  <li><strong>多平台支持</strong>：CLI、VS Code、JetBrains、Desktop、Slack、Web 一应俱全</li>
+                  <li><strong>自动记忆系统</strong>：CLAUDE.md + Auto Memory，跨会话记住项目规范</li>
+                </ul>
+              </td></tr>
+              <tr><td><span style="color:#f85149">❌ 不足</span></td><td>
+                <ul style="margin:0;padding-left:18px">
+                  <li><strong>价格较高</strong>：深度推理消耗大量 Token，Pro 用户经常触发超额费</li>
+                  <li><strong>闭源</strong>：代码不开源，无法自行审查或修改内部实现</li>
+                  <li><strong>官方账号依赖</strong>：Desktop 只支持 Anthropic 官方 OAuth 登录</li>
+                  <li><strong>终端调试偏弱</strong>：Terminal-Bench 得分低于 Codex</li>
+                </ul>
+              </td></tr>
+              <tr><td><span style="color:#d97706">🎯 适合谁</span></td><td>复杂架构设计、大型代码库重构、探索性编程、重视代码质量胜过成本的开发者</td></tr>
+            </tbody>
+          </table></div>
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>🔵 OpenAI Codex CLI — 效率与速度之王</span><span class="arrow">▶</span></div>
+        <div class="acc-body"><div class="acc-inner">
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>维度</th><th>评价</th></tr></thead>
+            <tbody>
+              <tr><td><span style="color:#3fb950">✅ 优势</span></td><td>
+                <ul style="margin:0;padding-left:18px">
+                  <li><strong>极速高效</strong>：Token 效率约为 Claude Code 的 3 倍，响应速度更快</li>
+                  <li><strong>终端调试强</strong>：Terminal-Bench 77.3%，擅长定位和修复运行时错误</li>
+                  <li><strong>开源 CLI</strong>：代码完全公开（Apache 2.0），可审查、修改、二次开发</li>
+                  <li><strong>异步工作流</strong>：支持「定义任务 → 云端执行 → 审查结果」的委派模式</li>
+                  <li><strong>GitHub 集成强</strong>：云端任务容器化执行，自动生成清晰的 PR</li>
+                  <li><strong>生态丰富</strong>：ChatGPT 生态无缝衔接，可同时使用对话 AI 和编程代理</li>
+                </ul>
+              </td></tr>
+              <tr><td><span style="color:#f85149">❌ 不足</span></td><td>
+                <ul style="margin:0;padding-left:18px">
+                  <li><strong>复杂推理偏弱</strong>：SWE-bench 64.7%，大型重构和架构任务不如 Claude</li>
+                  <li><strong>上下文窗口小</strong>：128K Token，处理超大代码库时不如 Claude</li>
+                  <li><strong>信用点限制</strong>：5 小时滚动窗口刷新，重度使用可能不够</li>
+                  <li><strong>云端依赖</strong>：部分功能（云端任务、代码审查）需要 Business 以上计划</li>
+                  <li><strong>可定制性有限</strong>：缺少 Claude 那样的 Skills/Hooks 系统</li>
+                </ul>
+              </td></tr>
+              <tr><td><span style="color:#d97706">🎯 适合谁</span></td><td>Bug 修复、终端调试、处理定义明确的工单、追求速度和成本效益的开发者</td></tr>
+            </tbody>
+          </table></div>
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>🟢 OpenCode — 开源多模型瑞士军刀</span><span class="arrow">▶</span></div>
+        <div class="acc-body"><div class="acc-inner">
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>维度</th><th>评价</th></tr></thead>
+            <tbody>
+              <tr><td><span style="color:#3fb950">✅ 优势</span></td><td>
+                <ul style="margin:0;padding-left:18px">
+                  <li><strong>完全免费开源</strong>：MIT 许可证，工具本身不收任何费用</li>
+                  <li><strong>多模型自由切换</strong>：支持 Claude、GPT、Gemini、Copilot、Bedrock、Groq、Azure 等</li>
+                  <li><strong>精美 TUI 界面</strong>：基于 Bubble Tea 构建，终端体验流畅美观</li>
+                  <li><strong>轻量级</strong>：Go 语言编写，启动快、资源占用低</li>
+                  <li><strong>MCP 支持</strong>：可扩展外部工具，支持 LSP 语言服务</li>
+                  <li><strong>无厂商锁定</strong>：不被任何单一 AI 厂商绑定，随时切换模型</li>
+                </ul>
+              </td></tr>
+              <tr><td><span style="color:#f85149">❌ 不足</span></td><td>
+                <ul style="margin:0;padding-left:18px">
+                  <li><strong>项目已归档</strong>：2025 年 9 月已归档，迁移至 <a href="https://github.com/charmbracelet/crush" target="_blank" style="color:#58a6ff">Crush</a>（仍处于早期开发阶段）</li>
+                  <li><strong>功能较基础</strong>：缺少 Hooks、Skills、子代理等高级功能</li>
+                  <li><strong>无官方支持</strong>：社区驱动，出问题需自行排查或依赖社区</li>
+                  <li><strong>API 费用自理</strong>：虽然工具免费，但使用 Claude/GPT 等模型仍需付费</li>
+                  <li><strong>生态不成熟</strong>：插件和扩展远不如 Claude Code 丰富</li>
+                </ul>
+              </td></tr>
+              <tr><td><span style="color:#d97706">🎯 适合谁</span></td><td>预算有限的学生/开发者、需要多模型切换、偏好开源工具、喜欢终端 TUI 体验的用户</td></tr>
+            </tbody>
+          </table></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>功能矩阵对比</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>功能</th><th>Claude Code</th><th>Codex CLI</th><th>OpenCode</th></tr></thead>
+      <tbody>
+        <tr><td>文件读写与编辑</td><td>✅</td><td>✅</td><td>✅</td></tr>
+        <tr><td>Shell 命令执行</td><td>✅</td><td>✅</td><td>✅</td></tr>
+        <tr><td>MCP 协议支持</td><td>✅ 内置</td><td>✅</td><td>✅</td></tr>
+        <tr><td>Git 深度集成</td><td>✅ Worktree/PR</td><td>✅ 云端 PR</td><td>⚠️ 基础</td></tr>
+        <tr><td>Hooks 钩子系统</td><td>✅ 4 种类型</td><td>⚠️ 有限</td><td>❌</td></tr>
+        <tr><td>Skills 技能系统</td><td>✅ 丰富</td><td>❌</td><td>⚠️ 自定义命令</td></tr>
+        <tr><td>子代理/多代理</td><td>✅ Task + Teams</td><td>⚠️ 多 Agent</td><td>❌</td></tr>
+        <tr><td>CLAUDE.md / 项目配置</td><td>✅ 多层级</td><td>⚠️ codex.md</td><td>⚠️ opencode.json</td></tr>
+        <tr><td>自动记忆</td><td>✅ Auto Memory</td><td>❌</td><td>⚠️ 会话保存</td></tr>
+        <tr><td>权限管理</td><td>✅ 6 种模式</td><td>✅ 3 种级别</td><td>⚠️ 基础</td></tr>
+        <tr><td>插件市场</td><td>✅ 官方市场</td><td>❌</td><td>❌</td></tr>
+        <tr><td>IDE 插件</td><td>✅ VS Code + JetBrains</td><td>✅ VS Code + JetBrains</td><td>❌</td></tr>
+        <tr><td>桌面应用</td><td>✅ Claude Desktop</td><td>✅ macOS App</td><td>❌</td></tr>
+        <tr><td>即时通讯集成</td><td>✅ Telegram/Discord 等</td><td>❌</td><td>❌</td></tr>
+        <tr><td>管道/脚本模式</td><td>✅ 完整支持</td><td>✅</td><td>✅ -p 模式</td></tr>
+        <tr><td>CI/CD 集成</td><td>✅ GitHub Actions</td><td>✅ GitHub Actions</td><td>⚠️ 需自行配置</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="sub">
+    <h3>如何选择？</h3>
+    <!-- SVG: Decision flow -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+        <!-- Start -->
+        <rect x="240" y="5" width="220" height="36" rx="18" fill="rgba(217,119,6,.12)" stroke="#d97706" stroke-width="1.5"/>
+        <text x="350" y="28" text-anchor="middle" fill="#f59e0b" font-size="12" font-weight="700">你需要什么？</text>
+        <!-- Branch 1 -->
+        <line x1="300" y1="41" x2="120" y2="75" stroke="#d97706" stroke-width="1.5"/>
+        <rect x="20" y="75" width="200" height="40" rx="8" fill="rgba(217,119,6,.06)" stroke="#d97706"/>
+        <text x="120" y="100" text-anchor="middle" fill="#e6edf3" font-size="11">复杂重构 · 架构设计</text>
+        <line x1="120" y1="115" x2="120" y2="140" stroke="#d97706" stroke-width="1.5"/>
+        <rect x="30" y="140" width="180" height="35" rx="8" fill="rgba(217,119,6,.15)" stroke="#f59e0b" stroke-width="2"/>
+        <text x="120" y="162" text-anchor="middle" fill="#f59e0b" font-size="13" font-weight="700">→ Claude Code</text>
+        <!-- Branch 2 -->
+        <line x1="350" y1="41" x2="350" y2="75" stroke="#58a6ff" stroke-width="1.5"/>
+        <rect x="250" y="75" width="200" height="40" rx="8" fill="rgba(88,166,255,.06)" stroke="#58a6ff"/>
+        <text x="350" y="100" text-anchor="middle" fill="#e6edf3" font-size="11">Bug 修复 · 终端调试</text>
+        <line x1="350" y1="115" x2="350" y2="140" stroke="#58a6ff" stroke-width="1.5"/>
+        <rect x="260" y="140" width="180" height="35" rx="8" fill="rgba(88,166,255,.15)" stroke="#58a6ff" stroke-width="2"/>
+        <text x="350" y="162" text-anchor="middle" fill="#58a6ff" font-size="13" font-weight="700">→ OpenAI Codex</text>
+        <!-- Branch 3 -->
+        <line x1="400" y1="41" x2="580" y2="75" stroke="#3fb950" stroke-width="1.5"/>
+        <rect x="480" y="75" width="200" height="40" rx="8" fill="rgba(63,185,80,.06)" stroke="#3fb950"/>
+        <text x="580" y="100" text-anchor="middle" fill="#e6edf3" font-size="11">零预算 · 多模型切换</text>
+        <line x1="580" y1="115" x2="580" y2="140" stroke="#3fb950" stroke-width="1.5"/>
+        <rect x="490" y="140" width="180" height="35" rx="8" fill="rgba(63,185,80,.15)" stroke="#3fb950" stroke-width="2"/>
+        <text x="580" y="162" text-anchor="middle" fill="#3fb950" font-size="13" font-weight="700">→ OpenCode</text>
+        <!-- Bottom: Mix -->
+        <rect x="180" y="195" width="340" height="35" rx="10" fill="rgba(188,140,255,.08)" stroke="#bc8cff" stroke-width="1.5"/>
+        <text x="350" y="217" text-anchor="middle" fill="#bc8cff" font-size="12" font-weight="600">💡 高级建议：同时使用 Claude Code + Codex，各取所长</text>
+      </svg>
+      <div class="svg-caption">选择决策树：根据你的需求选择最适合的工具</div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <h4>🧠 高级用户的混合工作流</h4>
+      <p>许多资深开发者同时使用多个工具，发挥各自优势：</p>
+      <ul>
+        <li>用 <strong>Claude Code</strong> 进行<strong>功能开发和复杂重构</strong>（代码理解力强、准确率高）</li>
+        <li>用 <strong>OpenAI Codex</strong> 进行<strong>代码审查和 Bug 修复</strong>（速度快、成本低、终端调试强）</li>
+        <li>用 <strong>OpenCode</strong> 进行<strong>快速原型和小脚本开发</strong>（多模型、轻量免费）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>安装对比</h3>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 三款工具一键安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># === Claude Code（Anthropic） ===
+npm install -g @anthropic-ai/claude-code
+# 或使用官方安装脚本
+curl -fsSL https://claude.ai/install.sh | bash
+
+# === OpenAI Codex CLI（OpenAI） ===
+npm install -g @openai/codex
+
+# === OpenCode（开源社区） ===
+brew install opencode-ai/tap/opencode
+# 或
+go install github.com/opencode-ai/opencode@latest
+
+# === 各自启动 ===
+claude          # Claude Code
+codex           # OpenAI Codex
+opencode        # OpenCode</div></div>
   </div>
 </section>
 
