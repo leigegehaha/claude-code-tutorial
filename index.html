@@ -42,6 +42,8 @@
     <div class="nav-item" data-target="memory"><span class="nav-ic">🧠</span> 记忆系统</div>
     <div class="nav-item" data-target="channels"><span class="nav-ic">💬</span> 即时通讯集成</div>
     <div class="nav-item" data-target="desktop"><span class="nav-ic">🖥️</span> 桌面端应用</div>
+    <div class="nav-item" data-target="top-skills"><span class="nav-ic">🏆</span> 热门 Skills</div>
+    <div class="nav-item" data-target="top-plugins"><span class="nav-ic">🔌</span> 热门插件</div>
     <div class="nav-sec">附录</div>
     <div class="nav-item" data-target="cheatsheet"><span class="nav-ic">📋</span> 速查表</div>
     <div class="nav-item" data-target="faq"><span class="nav-ic">❓</span> 常见问题</div>
@@ -1341,6 +1343,219 @@ aider --model claude-3-5-sonnet</div></div>
 # - "Cline" — 自主 AI Agent 插件
 # - "Continue" — 开源 AI 代码助手</div></div>
     </div>
+  </div>
+</section>
+
+<!-- ===================== TOP SKILLS ===================== -->
+<section class="section" id="top-skills">
+  <h2 class="section-title">🏆 热门 Skills Top 10 <span class="badge badge-advanced">高级</span></h2>
+  <div class="sub">
+    <p>Skills 是 Claude Code 的技能系统，通过 <code>SKILL.md</code> 文件定义专业能力，让 Claude 在特定场景下自动调用。以下是基于 GitHub Stars 和安装量排名的 2026 年最热门 Skills。</p>
+    <div class="tip"><strong>💡 安装方式：</strong>将 <code>SKILL.md</code> 文件放入 <code>~/.claude/skills/&lt;name&gt;/</code>（用户级）或 <code>.claude/skills/&lt;name&gt;/</code>（项目级）目录即可生效。</div>
+  </div>
+
+  <div class="sub">
+    <h3>1. Frontend Design — 生产级前端界面设计</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 41万+ 安装</span> <span class="badge" style="background:#3fb950">Anthropic 官方</span></p>
+    <p>生成独特的、生产级的前端界面代码，避免千篇一律的 AI 风格。支持 React、Tailwind、shadcn/ui 等现代前端栈。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">/plugin install frontend-design@claude-plugins-official</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://claude.com/plugins" target="_blank" style="color:#58a6ff">claude.com/plugins</a></p>
+  </div>
+
+  <div class="sub">
+    <h3>2. Superpowers — 全流程开发技能框架</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 29万+ 安装</span></p>
+    <p>结合 TDD、YAGNI、DRY 方法论，提供头脑风暴、子代理开发、代码审查、调试和技能编写的全流程支持。像给 Claude 装上了一整套"超能力"。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">/plugin install superpowers@claude-plugins-official</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://claude.com/plugins" target="_blank" style="color:#58a6ff">claude.com/plugins</a></p>
+  </div>
+
+  <div class="sub">
+    <h3>3. Code Review — AI 代码审查</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 19万+ 安装</span> <span class="badge" style="background:#3fb950">Anthropic 官方</span></p>
+    <p>专业代理进行代码审查，基于置信度的 PR 过滤，支持多代理并行审查。可自动检查代码质量、安全漏洞、性能问题。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">/plugin install code-review@claude-plugins-official</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://claude.com/plugins" target="_blank" style="color:#58a6ff">claude.com/plugins</a></p>
+  </div>
+
+  <div class="sub">
+    <h3>4. Feature Dev — 功能开发工作流</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 14万+ 安装</span> <span class="badge" style="background:#3fb950">Anthropic 官方</span></p>
+    <p>完整的功能开发工作流，包含探索（Exploration）、设计（Design）和审查（Review）三个阶段的代理，确保功能从需求到交付的质量。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">/plugin install feature-dev@claude-plugins-official</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://claude.com/plugins" target="_blank" style="color:#58a6ff">claude.com/plugins</a></p>
+  </div>
+
+  <div class="sub">
+    <h3>5. Context Engineering — 上下文工程</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 社区热门</span></p>
+    <p>改进提示设计的基础方法论，帮助开发者构建更好的系统提示词，优化 Claude 在复杂场景中的表现。适合需要精细控制 AI 行为的高级用户。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 从 GitHub 克隆安装
+git clone https://github.com/your-username/context-engineering.git
+mkdir -p ~/.claude/skills/context-engineering/
+cp context-engineering/SKILL.md ~/.claude/skills/context-engineering/</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://skillsmp.com" target="_blank" style="color:#58a6ff">skillsmp.com</a></p>
+  </div>
+
+  <div class="sub">
+    <h3>6. Multi-Agent Patterns — 多代理架构模式</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 社区热门</span></p>
+    <p>提供协作 AI 系统的多智能体架构设计模式，包括任务分解、并行执行、结果聚合等最佳实践。适合构建复杂的 AI 工作流。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 手动安装到用户级目录
+mkdir -p ~/.claude/skills/multi-agent-patterns/
+curl -o ~/.claude/skills/multi-agent-patterns/SKILL.md \
+  https://raw.githubusercontent.com/.../multi-agent-patterns/SKILL.md</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://skillsmp.com" target="_blank" style="color:#58a6ff">skillsmp.com</a></p>
+  </div>
+
+  <div class="sub">
+    <h3>7. Cloudflare Skill — Cloudflare 全平台开发</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 社区热门</span></p>
+    <p>覆盖 Cloudflare 60+ 产品的完整开发指南，包括 Workers、Pages、R2、D1、KV、Durable Objects 等。让 Claude 精通 Cloudflare 生态开发。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">/plugin install cloudflare@claude-plugins-official</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://claude.com/plugins" target="_blank" style="color:#58a6ff">claude.com/plugins</a></p>
+  </div>
+
+  <div class="sub">
+    <h3>8. Skill Creator — 技能创建向导</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 社区热门</span></p>
+    <p>从零开始设计和创建高质量 Skill 的引导向导。如果你想编写自己的 Claude Code 技能，这个技能会手把手教你构建标准化、可复用的 SKILL.md 文件。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">/plugin install skill-creator@claude-plugins-official</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://claude.com/plugins" target="_blank" style="color:#58a6ff">claude.com/plugins</a></p>
+  </div>
+
+  <div class="sub">
+    <h3>9. Confidence Check — 置信度自检</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 社区热门</span></p>
+    <p>让 Claude 在回答前自我评估可靠性和置信度，对不确定的内容主动标注。有效减少 AI 幻觉，提高输出可信度。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 手动安装
+mkdir -p ~/.claude/skills/confidence-check/
+# 下载 SKILL.md 到上述目录
+# 详见 https://skillsmp.com</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://skillsmp.com" target="_blank" style="color:#58a6ff">skillsmp.com</a></p>
+  </div>
+
+  <div class="sub">
+    <h3>10. Component Refactoring — React 组件重构</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 社区热门</span></p>
+    <p>React 组件重构专家，安全地拆分大型组件、优化渲染性能、改善代码结构。自动分析组件依赖关系，确保重构后功能不变。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 手动安装
+mkdir -p ~/.claude/skills/component-refactoring/
+# 下载 SKILL.md 到上述目录
+# 详见 https://skillsmp.com</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://skillsmp.com" target="_blank" style="color:#58a6ff">skillsmp.com</a></p>
+  </div>
+</section>
+
+<!-- ===================== TOP PLUGINS ===================== -->
+<section class="section" id="top-plugins">
+  <h2 class="section-title">🔌 热门插件 Top 10 <span class="badge badge-advanced">高级</span></h2>
+  <div class="sub">
+    <p>Plugins 是 Claude Code 的扩展包系统，打包了命令、代理、钩子、Skills 和 MCP 服务器，一键安装即可获得完整功能。以下是最受欢迎的插件。</p>
+    <div class="tip"><strong>💡 安装方式：</strong>在 Claude Code 中输入 <code>/plugin install &lt;name&gt;@claude-plugins-official</code> 即可安装。安装后运行 <code>/reload-plugins</code> 生效。</div>
+  </div>
+
+  <div class="sub">
+    <h3>1. GitHub — 官方 GitHub 集成</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 15.8万+ 安装</span> <span class="badge" style="background:#3fb950">Anthropic 官方</span></p>
+    <p>通过 MCP 协议直接与 GitHub 交互：管理仓库、创建 Issue、操作 PR、代码搜索、触发 CI/CD。开发者日常必备。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">/plugin install github@claude-plugins-official</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://claude.com/plugins" target="_blank" style="color:#58a6ff">claude.com/plugins</a> · <a href="https://github.com/anthropics/claude-plugins-official" target="_blank" style="color:#58a6ff">GitHub</a></p>
+  </div>
+
+  <div class="sub">
+    <h3>2. Playwright — 浏览器自动化与端到端测试</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 13.4万+ 安装</span></p>
+    <p>微软官方提供的 Playwright MCP 服务器。Claude 可以直接打开浏览器、填写表单、点击按钮、截图、运行端到端测试。前端开发和测试的利器。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">/plugin install playwright@claude-plugins-official</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://claude.com/plugins" target="_blank" style="color:#58a6ff">claude.com/plugins</a> · <a href="https://github.com/microsoft/playwright-mcp" target="_blank" style="color:#58a6ff">GitHub</a></p>
+  </div>
+
+  <div class="sub">
+    <h3>3. Context7 — 实时文档查找</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 21.2万+ 安装</span></p>
+    <p>Upstash 出品的 Context7 MCP 服务器，从源代码仓库拉取版本特定的文档和代码示例。Claude 不再依赖过时的训练数据，而是实时查阅最新文档。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">/plugin install context7@claude-plugins-official</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://claude.com/plugins" target="_blank" style="color:#58a6ff">claude.com/plugins</a> · <a href="https://github.com/upstash/context7-mcp" target="_blank" style="color:#58a6ff">GitHub</a></p>
+  </div>
+
+  <div class="sub">
+    <h3>4. TypeScript LSP — TypeScript 语言服务器</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 11.6万+ 安装</span> <span class="badge" style="background:#3fb950">Anthropic 官方</span></p>
+    <p>集成 TypeScript/JavaScript 语言服务器协议，让 Claude 进行真实的类型检查，发现类型错误和 lint 问题，大幅提升 TS 项目的代码质量。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">/plugin install typescript-lsp@claude-plugins-official</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://claude.com/plugins" target="_blank" style="color:#58a6ff">claude.com/plugins</a></p>
+  </div>
+
+  <div class="sub">
+    <h3>5. Code Simplifier — 代码简化优化</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 15.9万+ 安装</span> <span class="badge" style="background:#3fb950">Anthropic 官方</span></p>
+    <p>代码清晰度代理，简化并优化最近修改的代码，同时保持功能不变。像"代码美容师"一样让代码更易读、更简洁。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">/plugin install code-simplifier@claude-plugins-official</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://claude.com/plugins" target="_blank" style="color:#58a6ff">claude.com/plugins</a></p>
+  </div>
+
+  <div class="sub">
+    <h3>6. Ralph Loop — 迭代开发循环</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 12万+ 安装</span> <span class="badge" style="background:#3fb950">Anthropic 官方</span></p>
+    <p>交互式 AI 循环（Ralph Wiggum 技术），让 Claude 在"编写代码 → 运行测试 → 修复错误 → 再次测试"之间自动迭代，直到所有测试通过。适合 TDD 开发流程。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">/plugin install ralph-loop@claude-plugins-official</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://claude.com/plugins" target="_blank" style="color:#58a6ff">claude.com/plugins</a></p>
+  </div>
+
+  <div class="sub">
+    <h3>7. Awesome Claude Plugins (Composio) — 跨服务工作流协调器</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 社区热门</span></p>
+    <p>精选的插件注册中心和工具路由器，集成 500+ SaaS 应用（Google、Slack、GitHub、Jira 等），可将 Claude 变身为跨服务的工作流自动化引擎。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">git clone https://github.com/composio/awesome-claude-plugins.git
+cd awesome-claude-plugins
+claude --plugin-dir ./connect-apps
+# 然后在 Claude Code 中运行 /connect-apps:setup</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://github.com/composio/awesome-claude-plugins" target="_blank" style="color:#58a6ff">GitHub</a></p>
+  </div>
+
+  <div class="sub">
+    <h3>8. Claude-Mem — 长期记忆增强</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 社区热门</span></p>
+    <p>为 Claude 添加持久化的长期记忆能力，使用 SQLite + Chroma 进行混合搜索，让 Claude 跨会话记住用户偏好、项目上下文和重要决策。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 从 GitHub 安装
+git clone https://github.com/your-repo/claude-mem.git
+cd claude-mem
+claude --plugin-dir .</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://claude.com/plugins" target="_blank" style="color:#58a6ff">claude.com/plugins</a></p>
+  </div>
+
+  <div class="sub">
+    <h3>9. Plannotator — 可视化计划审查</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 社区热门</span></p>
+    <p>增强 Claude Code 的规划模式（Plan Mode），生成结构化的、可注释的执行计划。方便你在 Claude 执行前审查每一步，支持团队协作审查。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">/plugin install plannotator@claude-plugins-official</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://claude.com/plugins" target="_blank" style="color:#58a6ff">claude.com/plugins</a></p>
+  </div>
+
+  <div class="sub">
+    <h3>10. Shipyard — 企业级生产流程</h3>
+    <p><span class="badge" style="background:#d97706">⭐ 社区热门</span></p>
+    <p>在 Superpowers 基础上增加了 IaC（基础设施即代码）验证和安全审计功能，适合需要严格合规检查的企业级项目开发流程。</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">/plugin install shipyard@claude-plugins-official</div></div>
+    <p style="font-size:12px;color:#8b949e;margin-top:4px">🔗 <a href="https://claude.com/plugins" target="_blank" style="color:#58a6ff">claude.com/plugins</a></p>
+  </div>
+
+  <div class="sub">
+    <h3>插件管理速查</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>命令</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td><code>/plugin</code></td><td>打开插件管理界面（发现/已安装/市场）</td></tr>
+        <tr><td><code>/plugin install &lt;name&gt;@&lt;market&gt;</code></td><td>安装插件</td></tr>
+        <tr><td><code>/plugin uninstall &lt;name&gt;@&lt;market&gt;</code></td><td>卸载插件</td></tr>
+        <tr><td><code>/plugin enable &lt;name&gt;@&lt;market&gt;</code></td><td>启用插件</td></tr>
+        <tr><td><code>/plugin disable &lt;name&gt;@&lt;market&gt;</code></td><td>禁用插件</td></tr>
+        <tr><td><code>/reload-plugins</code></td><td>重新加载所有插件（无需重启）</td></tr>
+        <tr><td><code>/plugin marketplace add &lt;source&gt;</code></td><td>添加第三方市场</td></tr>
+      </tbody>
+    </table></div>
+    <div class="warn"><strong>⚠️ 安全提示：</strong>插件是高信任组件，可以执行任意代码。请仅从 Anthropic 官方市场或你信任的来源安装。</div>
   </div>
 </section>
 
