@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code 学习教程 — 从入门到精通</title>
+<link rel="stylesheet" href="claude-code-tutorial.css">
+</head>
+<body>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<button class="sb-toggle" id="sbToggle" onclick="toggleSidebar()">☰</button>
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0})">↑</button>
+
+<div class="app">
+<!-- ========== SIDEBAR ========== -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-head"><h2>📖 Claude Code 教程</h2></div>
+  <div class="search-wrap"><input class="search-input" id="searchInput" placeholder="🔍 搜索内容..." oninput="filterNav(this.value)"></div>
+  <nav class="sb-nav" id="sbNav">
+    <div class="nav-sec">快速开始</div>
+    <div class="nav-item active" data-target="hero"><span class="nav-ic">🏠</span> 首页概览</div>
+    <div class="nav-item" data-target="install"><span class="nav-ic">⬇️</span> 安装与环境</div>
+    <div class="nav-sec">🌱 入门篇</div>
+    <div class="nav-item" data-target="basic-commands"><span class="nav-ic">💬</span> 基础命令</div>
+    <div class="nav-item" data-target="first-task"><span class="nav-ic">🚀</span> 第一个任务</div>
+    <div class="nav-item" data-target="slash-cmds"><span class="nav-ic">⚡</span> 斜杠命令</div>
+    <div class="nav-item" data-target="file-ref"><span class="nav-ic">📎</span> 文件引用语法</div>
+    <div class="nav-sec">🔧 中级篇</div>
+    <div class="nav-item" data-target="cli-flags"><span class="nav-ic">⚙️</span> CLI 高级标志</div>
+    <div class="nav-item" data-target="pipe-mode"><span class="nav-ic">🔌</span> 管道与脚本</div>
+    <div class="nav-item" data-target="claudemd"><span class="nav-ic">📝</span> CLAUDE.md 配置</div>
+    <div class="nav-item" data-target="git-flow"><span class="nav-ic">🔀</span> Git 工作流</div>
+    <div class="nav-item" data-target="multi-session"><span class="nav-ic">🔄</span> 多会话管理</div>
+    <div class="nav-sec">🚀 高级篇</div>
+    <div class="nav-item" data-target="hooks"><span class="nav-ic">🪝</span> Hooks 钩子系统</div>
+    <div class="nav-item" data-target="skills"><span class="nav-ic">🎯</span> 技能 (Skills)</div>
+    <div class="nav-item" data-target="mcp"><span class="nav-ic">🌐</span> MCP 集成</div>
+    <div class="nav-item" data-target="multi-agent"><span class="nav-ic">🤖</span> 多代理协作</div>
+    <div class="nav-item" data-target="ci-cd"><span class="nav-ic">🚢</span> CI/CD 自动化</div>
+    <div class="nav-item" data-target="permissions"><span class="nav-ic">🔐</span> 权限与安全模式</div>
+    <div class="nav-item" data-target="sub-agents"><span class="nav-ic">🧩</span> 子代理系统</div>
+    <div class="nav-item" data-target="memory"><span class="nav-ic">🧠</span> 记忆系统</div>
+    <div class="nav-item" data-target="channels"><span class="nav-ic">💬</span> 即时通讯集成</div>
+    <div class="nav-item" data-target="desktop"><span class="nav-ic">🖥️</span> 桌面端应用</div>
+    <div class="nav-sec">附录</div>
+    <div class="nav-item" data-target="cheatsheet"><span class="nav-ic">📋</span> 速查表</div>
+    <div class="nav-item" data-target="faq"><span class="nav-ic">❓</span> 常见问题</div>
+  </nav>
+</aside>
+
+<!-- ========== MAIN ========== -->
+<div class="main">
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-badge">✨ 2025 最新版 · 持续更新</div>
+  <h1>Claude Code 学习教程</h1>
+  <p>从零开始掌握 Anthropic 推出的 AI 编程助手 Claude Code，涵盖入门、中级、高级用法，配合实际示例让你快速上手。</p>
+  <!-- SVG: Architecture Overview -->
+  <div class="svg-wrap" style="margin-top:24px">
+    <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+      <!-- Claude Core -->
+      <rect x="240" y="60" width="220" height="80" rx="12" fill="#1c2333" stroke="#d97706" stroke-width="2"/>
+      <text x="350" y="95" text-anchor="middle" fill="#f59e0b" font-size="16" font-weight="700">Claude Code</text>
+      <text x="350" y="118" text-anchor="middle" fill="#8b949e" font-size="12">AI 编程引擎</text>
+      <!-- Left: Input -->
+      <rect x="20" y="55" width="160" height="90" rx="10" fill="#161b22" stroke="#30363d"/>
+      <text x="100" y="88" text-anchor="middle" fill="#58a6ff" font-size="13" font-weight="600">开发者输入</text>
+      <text x="100" y="108" text-anchor="middle" fill="#8b949e" font-size="11">自然语言 / CLI 命令</text>
+      <line x1="180" y1="100" x2="238" y2="100" stroke="#58a6ff" stroke-width="2" marker-end="url(#ah)"/>
+      <!-- Right: Output -->
+      <rect x="520" y="55" width="160" height="90" rx="10" fill="#161b22" stroke="#30363d"/>
+      <text x="600" y="88" text-anchor="middle" fill="#3fb950" font-size="13" font-weight="600">代码输出</text>
+      <text x="600" y="108" text-anchor="middle" fill="#8b949e" font-size="11">文件 / 命令 / Git</text>
+      <line x1="462" y1="100" x2="518" y2="100" stroke="#3fb950" stroke-width="2" marker-end="url(#ah2)"/>
+      <!-- Bottom: Tools -->
+      <rect x="270" y="165" width="160" height="30" rx="6" fill="#161b22" stroke="#30363d"/>
+      <text x="350" y="185" text-anchor="middle" fill="#bc8cff" font-size="11">MCP · Hooks · Skills</text>
+      <line x1="350" y1="142" x2="350" y2="163" stroke="#bc8cff" stroke-width="1.5" stroke-dasharray="4"/>
+      <defs>
+        <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#58a6ff"/></marker>
+        <marker id="ah2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0,0 8,3 0,6" fill="#3fb950"/></marker>
+      </defs>
+    </svg>
+    <div class="svg-caption">Claude Code 核心架构：输入 → AI 引擎处理 → 输出，底层通过 MCP/Hooks/Skills 扩展</div>
+  </div>
+</section>
+
+<div class="content">
+
+<!-- ===================== INSTALL ===================== -->
+<section class="section" id="install">
+  <h2 class="section-title">⬇️ 安装与环境 <span class="badge badge-beginner">入门</span></h2>
+  <div class="sub">
+    <h3>安装 Claude Code</h3>
+    <p>支持 macOS、Linux、WSL 和 Windows（PowerShell）。推荐使用终端 CLI 方式：</p>
+    <div class="tabs">
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(this,'install')">macOS / Linux</button>
+        <button class="tab-btn" onclick="switchTab(this,'install')">Windows</button>
+        <button class="tab-btn" onclick="switchTab(this,'install')">npm</button>
+      </div>
+      <div class="tab-panel active" data-tab-group="install">
+        <div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">curl -fsSL https://claude.ai/install.sh | bash</div></div>
+      </div>
+      <div class="tab-panel" data-tab-group="install">
+        <div class="code-block"><div class="code-header"><span class="lang">powershell</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">irm https://claude.ai/install.ps1 | iex</div></div>
+      </div>
+      <div class="tab-panel" data-tab-group="install">
+        <div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">npm install -g @anthropic-ai/claude-code</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="sub">
+    <h3>启动与登录</h3>
+    <div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 进入你的项目目录
+cd my-project
+
+# 启动 Claude Code（首次使用需登录）
+claude</div></div>
+    <div class="tip"><strong>💡 提示：</strong>也可以在 VS Code 扩展商店搜索 "Claude Code" 安装插件，或下载 Desktop 桌面版。</div>
+  </div>
+</section>
+
+<!-- ===================== BASIC COMMANDS ===================== -->
+<section class="section" id="basic-commands">
+  <h2 class="section-title">💬 基础命令 <span class="badge badge-beginner">入门</span></h2>
+  <div class="sub">
+    <h3>核心交互方式</h3>
+    <p>Claude Code 有三种基本使用方式：交互模式、非交互模式和管道模式。</p>
+    <!-- SVG: Three modes -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+        <!-- Mode 1 -->
+        <rect x="10" y="20" width="200" height="120" rx="10" fill="#161b22" stroke="#3fb950" stroke-width="1.5"/>
+        <circle cx="110" cy="58" r="18" fill="rgba(63,185,80,.15)" stroke="#3fb950" stroke-width="1.5"/>
+        <text x="110" y="63" text-anchor="middle" fill="#3fb950" font-size="16">💬</text>
+        <text x="110" y="95" text-anchor="middle" fill="#e6edf3" font-size="14" font-weight="700">交互模式</text>
+        <text x="110" y="115" text-anchor="middle" fill="#8b949e" font-size="11">claude</text>
+        <!-- Mode 2 -->
+        <rect x="240" y="20" width="200" height="120" rx="10" fill="#161b22" stroke="#58a6ff" stroke-width="1.5"/>
+        <circle cx="340" cy="58" r="18" fill="rgba(88,166,255,.15)" stroke="#58a6ff" stroke-width="1.5"/>
+        <text x="340" y="63" text-anchor="middle" fill="#58a6ff" font-size="16">🖨️</text>
+        <text x="340" y="95" text-anchor="middle" fill="#e6edf3" font-size="14" font-weight="700">打印模式</text>
+        <text x="340" y="115" text-anchor="middle" fill="#8b949e" font-size="11">claude -p "..."</text>
+        <!-- Mode 3 -->
+        <rect x="470" y="20" width="200" height="120" rx="10" fill="#161b22" stroke="#bc8cff" stroke-width="1.5"/>
+        <circle cx="570" cy="58" r="18" fill="rgba(188,140,255,.15)" stroke="#bc8cff" stroke-width="1.5"/>
+        <text x="570" y="63" text-anchor="middle" fill="#bc8cff" font-size="16">🔌</text>
+        <text x="570" y="95" text-anchor="middle" fill="#e6edf3" font-size="14" font-weight="700">管道模式</text>
+        <text x="570" y="115" text-anchor="middle" fill="#8b949e" font-size="11">cat file | claude -p</text>
+      </svg>
+      <div class="svg-caption">Claude Code 三种核心使用模式</div>
+    </div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>命令</th><th>说明</th><th>示例</th></tr></thead>
+      <tbody>
+        <tr><td><code>claude</code></td><td>启动交互式会话</td><td>进入项目后直接对话</td></tr>
+        <tr><td><code>claude "query"</code></td><td>带初始提示启动会话</td><td><code>claude "解释这个项目"</code></td></tr>
+        <tr><td><code>claude -p "query"</code></td><td>非交互打印模式</td><td><code>claude -p "列出所有 TODO"</code></td></tr>
+        <tr><td><code>claude -c</code></td><td>继续上次对话</td><td><code>claude -c</code></td></tr>
+        <tr><td><code>claude update</code></td><td>更新到最新版</td><td><code>claude update</code></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ===================== FIRST TASK ===================== -->
+<section class="section" id="first-task">
+  <h2 class="section-title">🚀 第一个任务 <span class="badge badge-beginner">入门</span></h2>
+  <div class="sub">
+    <h3>实战示例：为项目添加单元测试</h3>
+    <p>假设你有一个 <code>auth.js</code> 模块，想让它自动生成测试：</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 启动 Claude Code
+claude
+
+# 在交互模式中输入：
+> 为 auth.js 模块编写单元测试，覆盖登录和注册功能，然后运行测试并修复失败用例</div></div>
+    <div class="tip"><strong>💡 实践要点：</strong>用自然语言描述需求，Claude Code 会自动读取文件、编写测试、运行并修复。</div>
+  </div>
+  <div class="sub">
+    <h3>实战示例：修复 Bug</h3>
+    <div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 直接把错误信息交给 Claude
+claude "修复这个 TypeError: Cannot read properties of undefined 错误，它在用户登录时出现"
+
+# 或者用管道传入日志
+cat error.log | claude -p "分析这个错误的根本原因并提供修复方案"</div></div>
+  </div>
+</section>
+
+<!-- ===================== SLASH COMMANDS ===================== -->
+<section class="section" id="slash-cmds">
+  <h2 class="section-title">⚡ 斜杠命令 <span class="badge badge-beginner">入门</span></h2>
+  <div class="sub">
+    <p>在交互模式中输入 <code>/</code> 即可查看所有可用命令。以下是常用内置命令：</p>
+    <div class="accordion">
+      <div class="acc-item open">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>📋 会话管理命令</span><span class="arrow">▶</span></div>
+        <div class="acc-body"><div class="acc-inner">
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>命令</th><th>功能</th></tr></thead>
+            <tbody>
+              <tr><td><code>/clear</code></td><td>清除当前会话上下文</td></tr>
+              <tr><td><code>/compact</code></td><td>压缩会话内容（节省 token）</td></tr>
+              <tr><td><code>/cost</code></td><td>查看当前会话的 token 使用费用</td></tr>
+              <tr><td><code>/resume</code></td><td>浏览和恢复历史会话</td></tr>
+              <tr><td><code>/rename</code></td><td>给当前会话命名</td></tr>
+            </tbody>
+          </table></div>
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>⚙️ 配置与诊断命令</span><span class="arrow">▶</span></div>
+        <div class="acc-body"><div class="acc-inner">
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>命令</th><th>功能</th></tr></thead>
+            <tbody>
+              <tr><td><code>/config</code></td><td>打开设置配置</td></tr>
+              <tr><td><code>/doctor</code></td><td>运行诊断检查</td></tr>
+              <tr><td><code>/help</code></td><td>显示帮助信息</td></tr>
+              <tr><td><code>/init</code></td><td>初始化项目（创建 CLAUDE.md）</td></tr>
+              <tr><td><code>/login / /logout</code></td><td>登录/登出账户</td></tr>
+              <tr><td><code>/terminal-setup</code></td><td>终端环境设置</td></tr>
+            </tbody>
+          </table></div>
+        </div></div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head" onclick="toggleAcc(this)"><span>🎯 捆绑技能命令</span><span class="arrow">▶</span></div>
+        <div class="acc-body"><div class="acc-inner">
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>命令</th><th>功能</th></tr></thead>
+            <tbody>
+              <tr><td><code>/review</code></td><td>代码审查（检查 diff 或 PR）</td></tr>
+              <tr><td><code>/batch &lt;instruction&gt;</code></td><td>大规模并行代码变更</td></tr>
+              <tr><td><code>/debug [desc]</code></td><td>启用调试模式</td></tr>
+              <tr><td><code>/loop [interval] &lt;prompt&gt;</code></td><td>定时循环执行任务</td></tr>
+              <tr><td><code>/simplify [focus]</code></td><td>简化和优化代码</td></tr>
+            </tbody>
+          </table></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FILE REFERENCE ===================== -->
+<section class="section" id="file-ref">
+  <h2 class="section-title">📎 文件引用语法 <span class="badge badge-beginner">入门</span></h2>
+  <div class="sub">
+    <p>在对话中可以用 <code>@</code> 符号引用文件或目录，Claude 会自动读取内容：</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>语法</th><th>说明</th><th>示例</th></tr></thead>
+      <tbody>
+        <tr><td><code>@src/utils/auth.js</code></td><td>引用单个文件内容</td><td>"解释 @src/auth.js 中的登录逻辑"</td></tr>
+        <tr><td><code>@src/components</code></td><td>引用整个目录结构</td><td>"列出 @src/components 中所有组件"</td></tr>
+        <tr><td><code>@server:resource</code></td><td>引用 MCP 服务器资源</td><td>"查看 @jira:PROJ-123 的详情"</td></tr>
+      </tbody>
+    </table></div>
+    <div class="tip"><strong>💡 技巧：</strong>引用文件可以让 Claude 精确理解你讨论的代码，避免歧义。</div>
+  </div>
+</section>
+
+<!-- ===================== CLI FLAGS ===================== -->
+<section class="section" id="cli-flags">
+  <h2 class="section-title">⚙️ CLI 高级标志 <span class="badge badge-intermediate">中级</span></h2>
+  <div class="sub">
+    <h3>常用命令行标志</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>标志</th><th>说明</th><th>示例</th></tr></thead>
+      <tbody>
+        <tr><td><code>--continue, -c</code></td><td>继续当前目录的最近对话</td><td><code>claude -c</code></td></tr>
+        <tr><td><code>--resume, -r</code></td><td>按 ID 或名称恢复特定会话</td><td><code>claude -r "auth-refactor"</code></td></tr>
+        <tr><td><code>--bare</code></td><td>精简模式（跳过钩子/技能发现）</td><td><code>claude --bare -p "query"</code></td></tr>
+        <tr><td><code>--max-turns N</code></td><td>限制 Agent 执行轮数</td><td><code>claude -p --max-turns 5 "fix lint"</code></td></tr>
+        <tr><td><code>--output-format</code></td><td>输出格式：text / json / stream-json</td><td><code>claude -p --output-format json "..."</code></td></tr>
+        <tr><td><code>--verbose</code></td><td>显示详细日志</td><td><code>claude --verbose</code></td></tr>
+        <tr><td><code>--no-session-persistence</code></td><td>不保存会话到磁盘</td><td><code>claude -p --no-session-persistence "..."</code></td></tr>
+        <tr><td><code>--worktree</code></td><td>在 Git worktree 中工作</td><td><code>claude --worktree feature-auth</code></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="sub">
+    <h3>系统提示词定制</h3>
+    <!-- SVG: System prompt layers -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 600 140" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+        <rect x="50" y="10" width="500" height="30" rx="6" fill="rgba(139,148,158,.1)" stroke="#30363d"/>
+        <text x="300" y="30" text-anchor="middle" fill="#8b949e" font-size="12">Claude Code 默认系统提示词（内置能力）</text>
+        <rect x="80" y="50" width="440" height="30" rx="6" fill="rgba(217,119,6,.08)" stroke="#d97706" stroke-width="1.5" stroke-dasharray="6"/>
+        <text x="300" y="70" text-anchor="middle" fill="#d97706" font-size="12">--append-system-prompt 追加自定义规则</text>
+        <rect x="110" y="90" width="380" height="30" rx="6" fill="rgba(63,185,80,.08)" stroke="#3fb950" stroke-width="1.5" stroke-dasharray="6"/>
+        <text x="300" y="110" text-anchor="middle" fill="#3fb950" font-size="12">用户输入 / 项目文件上下文</text>
+      </svg>
+      <div class="svg-caption">系统提示词的三层叠加结构</div>
+    </div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>标志</th><th>行为</th><th>推荐度</th></tr></thead>
+      <tbody>
+        <tr><td><code>--system-prompt</code></td><td>完全替换默认提示词</td><td>⚠️ 谨慎使用</td></tr>
+        <tr><td><code>--system-prompt-file</code></td><td>用文件内容替换默认提示词</td><td>⚠️ 谨慎使用</td></tr>
+        <tr><td><code>--append-system-prompt</code></td><td>在默认提示词后追加文本</td><td>✅ 推荐</td></tr>
+        <tr><td><code>--append-system-prompt-file</code></td><td>用文件内容追加到提示词后</td><td>✅ 推荐</td></tr>
+      </tbody>
+    </table></div>
+    <div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 追加自定义规则（推荐）
+claude -p --append-system-prompt "始终使用中文回复，代码注释使用中文" "解释这个文件"
+
+# 使用规则文件
+claude -p --append-system-prompt-file ./my-rules.txt "重构这个模块"</div></div>
+  </div>
+</section>
+
+<!-- ===================== PIPE MODE ===================== -->
+<section class="section" id="pipe-mode">
+  <h2 class="section-title">🔌 管道与脚本模式 <span class="badge badge-intermediate">中级</span></h2>
+  <div class="sub">
+    <h3>Unix 管道集成</h3>
+    <p>Claude Code 可以作为 Unix 管道的一部分，接收其他命令的输出：</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 分析构建错误
+cat build-error.log | claude -p "分析构建失败的根本原因"
+
+# 审查 Git diff
+git diff main | claude -p "审查这些代码变更，指出潜在问题"
+
+# 分析日志异常
+tail -200 app.log | claude -p "如果发现异常就告警"
+
+# 提取信息并生成报告
+npm audit --json | claude -p "生成安全漏洞修复优先级报告"</div></div>
+  </div>
+  <div class="sub">
+    <h3>脚本自动化</h3>
+    <div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">#!/bin/bash
+# auto-review.sh — 自动代码审查脚本
+
+# 获取最新变更的文件
+CHANGED=$(git diff --name-only HEAD~1)
+
+# 让 Claude 审查每个文件
+for file in $CHANGED; do
+  echo "=== 审查: $file ==="
+  claude -p --bare "审查这个文件的代码质量，只给出改进建议：" "$file"
+done</div></div>
+    <div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># JSON 输出用于程序处理
+claude -p --output-format json --max-turns 3 "列出所有 TODO 注释" | jq '.result'</div></div>
+  </div>
+</section>
+
+<!-- ===================== CLAUDE.md ===================== -->
+<section class="section" id="claudemd">
+  <h2 class="section-title">📝 CLAUDE.md 项目配置 <span class="badge badge-intermediate">中级</span></h2>
+  <div class="sub">
+    <h3>什么是 CLAUDE.md？</h3>
+    <p>CLAUDE.md 是项目级别的指令文件，Claude Code 每次启动会自动读取。用于设定编码规范、架构约定和工作流程。</p>
+    <!-- SVG: CLAUDE.md layers -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+        <rect x="60" y="10" width="480" height="36" rx="8" fill="rgba(188,140,255,.08)" stroke="#bc8cff" stroke-width="1.5"/>
+        <text x="300" y="33" text-anchor="middle" fill="#bc8cff" font-size="13" font-weight="600">~/.claude/CLAUDE.md — 用户级（个人偏好）</text>
+        <rect x="100" y="56" width="400" height="36" rx="8" fill="rgba(217,119,6,.08)" stroke="#d97706" stroke-width="1.5"/>
+        <text x="300" y="79" text-anchor="middle" fill="#d97706" font-size="13" font-weight="600">./CLAUDE.md — 项目级（团队共享，纳入版本控制）</text>
+        <rect x="140" y="102" width="320" height="36" rx="8" fill="rgba(63,185,80,.08)" stroke="#3fb950" stroke-width="1.5"/>
+        <text x="300" y="125" text-anchor="middle" fill="#3fb950" font-size="13" font-weight="600">.claude/rules/*.md — 规则文件（按主题拆分）</text>
+        <rect x="180" y="148" width="240" height="24" rx="6" fill="rgba(88,166,255,.08)" stroke="#58a6ff" stroke-width="1.5"/>
+        <text x="300" y="165" text-anchor="middle" fill="#58a6ff" font-size="11">自动记忆（Claude 自动生成）</text>
+      </svg>
+      <div class="svg-caption">CLAUDE.md 配置层级：优先级从高到低</div>
+    </div>
+  </div>
+  <div class="sub">
+    <h3>示例：创建项目 CLAUDE.md</h3>
+    <div class="code-block"><div class="code-header"><span class="lang">markdown</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 项目规范
+
+## 技术栈
+- 框架：Next.js 14 + TypeScript
+- 样式：Tailwind CSS
+- 测试：Vitest + Testing Library
+
+## 编码规范
+- 使用 2 空格缩进
+- 组件使用函数式写法 + hooks
+- 文件命名使用 kebab-case
+- 所有 API 响应必须有错误处理
+
+## Git 规范
+- 提交信息格式：type(scope): description
+- 例如：feat(auth): add login page
+
+## 测试命令
+- `npm test` — 运行所有测试
+- `npm test:watch` — 监听模式
+
+## 架构说明
+- src/app/ — Next.js App Router 页面
+- src/components/ — 可复用组件
+- src/lib/ — 工具函数和共享逻辑
+- src/hooks/ — 自定义 Hooks</div></div>
+    <div class="tip"><strong>💡 最佳实践：</strong>用 <code>/init</code> 命令快速生成 CLAUDE.md 模板；文件大小建议控制在 200 行以内。</div>
+  </div>
+  <div class="sub">
+    <h3>规则文件拆分</h3>
+    <p>大型项目可以在 <code>.claude/rules/</code> 下按主题组织规则：</p>
+    <div class="code-block"><div class="code-header"><span class="lang">text</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">.claude/
+├── CLAUDE.md          # 主配置文件
+└── rules/
+    ├── typescript.md  # TS 相关规则
+    ├── testing.md     # 测试规范
+    └── api-design.md  # API 设计约定</div></div>
+  </div>
+</section>
+
+<!-- ===================== GIT WORKFLOW ===================== -->
+<section class="section" id="git-flow">
+  <h2 class="section-title">🔀 Git 工作流集成 <span class="badge badge-intermediate">中级</span></h2>
+  <div class="sub">
+    <h3>常用 Git 操作</h3>
+    <div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 提交代码（Claude 自动生成提交信息）
+claude "commit my changes with a descriptive message"
+
+# 创建 Pull Request
+claude "create a PR for the feature I just built"
+
+# 查看差异并审查
+claude "review the changes I made compared to main"
+
+# 解决合并冲突
+claude "resolve the merge conflicts in src/auth/login.ts"</div></div>
+  </div>
+  <div class="sub">
+    <h3>Git Worktree 并行开发</h3>
+    <p>使用 <code>--worktree</code> 可以在不同分支上同时运行多个 Claude 实例：</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 终端 1：在新功能分支上工作
+claude --worktree feature-auth
+
+# 终端 2：同时修复 bug
+claude --worktree bugfix-123</div></div>
+    <div class="tip"><strong>💡 技巧：</strong>创建的 PR 会自动与当前会话关联，下次可以用 <code>claude --from-pr &lt;number&gt;</code> 恢复。</div>
+  </div>
+</section>
+
+<!-- ===================== MULTI SESSION ===================== -->
+<section class="section" id="multi-session">
+  <h2 class="section-title">🔄 多会话管理 <span class="badge badge-intermediate">中级</span></h2>
+  <div class="sub">
+    <h3>会话命名与恢复</h3>
+    <div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 创建命名会话
+claude -n auth-refactor
+
+# 在会话中重命名
+> /rename auth-refactor
+
+# 恢复特定会话
+claude --resume auth-refactor
+
+# 继续最近一次对话
+claude -c
+
+# 在交互模式中浏览历史会话
+> /resume</div></div>
+  </div>
+  <div class="sub">
+    <h3>会话切换与跨平台</h3>
+    <div class="card">
+      <h4>🌐 跨平台无缝切换</h4>
+      <ul>
+        <li><code>/desktop</code> — 将终端会话转移到 Desktop 应用</li>
+        <li><code>/teleport</code> — 将任务迁移到 Web 端继续</li>
+        <li>支持在 VS Code、JetBrains、终端、iOS 之间同步</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<!-- ===================== HOOKS ===================== -->
+<section class="section" id="hooks">
+  <h2 class="section-title">🪝 Hooks 钩子系统 <span class="badge badge-advanced">高级</span></h2>
+  <div class="sub">
+    <h3>钩子系统概述</h3>
+    <p>Hooks 是用户定义的自动化脚本，在 Claude Code 生命周期的特定节点自动执行。支持四种类型：</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>类型</th><th>说明</th><th>适用场景</th></tr></thead>
+      <tbody>
+        <tr><td><code>command</code></td><td>执行 Shell 命令</td><td>自动格式化、lint 检查</td></tr>
+        <tr><td><code>http</code></td><td>发送 HTTP POST 请求</td><td>通知外部系统、Webhook</td></tr>
+        <tr><td><code>prompt</code></td><td>LLM 单轮评估</td><td>代码质量检查、安全扫描</td></tr>
+        <tr><td><code>agent</code></td><td>生成子代理多轮验证</td><td>深度代码审查、复杂验证</td></tr>
+      </tbody>
+    </table></div>
+    <!-- SVG: Hook lifecycle -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 700 130" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+        <rect x="10" y="40" width="100" height="50" rx="8" fill="rgba(88,166,255,.1)" stroke="#58a6ff"/>
+        <text x="60" y="70" text-anchor="middle" fill="#58a6ff" font-size="11" font-weight="600">SessionStart</text>
+        <rect x="140" y="40" width="100" height="50" rx="8" fill="rgba(248,81,73,.1)" stroke="#f85149"/>
+        <text x="190" y="63" text-anchor="middle" fill="#f85149" font-size="10" font-weight="600">PreToolUse</text>
+        <text x="190" y="78" text-anchor="middle" fill="#8b949e" font-size="9">拦截/修改</text>
+        <rect x="270" y="20" width="100" height="90" rx="8" fill="rgba(217,119,6,.1)" stroke="#d97706"/>
+        <text x="320" y="55" text-anchor="middle" fill="#d97706" font-size="11" font-weight="700">工具执行</text>
+        <text x="320" y="73" text-anchor="middle" fill="#8b949e" font-size="9">Bash/Read/</text>
+        <text x="320" y="87" text-anchor="middle" fill="#8b949e" font-size="9">Write/Edit</text>
+        <rect x="400" y="40" width="120" height="50" rx="8" fill="rgba(63,185,80,.1)" stroke="#3fb950"/>
+        <text x="460" y="63" text-anchor="middle" fill="#3fb950" font-size="10" font-weight="600">PostToolUse</text>
+        <text x="460" y="78" text-anchor="middle" fill="#8b949e" font-size="9">格式化/检查</text>
+        <rect x="550" y="40" width="120" height="50" rx="8" fill="rgba(188,140,255,.1)" stroke="#bc8cff"/>
+        <text x="610" y="63" text-anchor="middle" fill="#bc8cff" font-size="10" font-weight="600">Permission</text>
+        <text x="610" y="78" text-anchor="middle" fill="#8b949e" font-size="9">自动批准/拒绝</text>
+        <line x1="112" y1="65" x2="138" y2="65" stroke="#30363d" stroke-width="1.5" marker-end="url(#ar)"/>
+        <line x1="242" y1="65" x2="268" y2="65" stroke="#30363d" stroke-width="1.5" marker-end="url(#ar)"/>
+        <line x1="372" y1="65" x2="398" y2="65" stroke="#30363d" stroke-width="1.5" marker-end="url(#ar)"/>
+        <line x1="522" y1="65" x2="548" y2="65" stroke="#30363d" stroke-width="1.5" marker-end="url(#ar)"/>
+        <defs><marker id="ar" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0,0 6,2.5 0,5" fill="#30363d"/></marker></defs>
+      </svg>
+      <div class="svg-caption">Hooks 生命周期：会话开始 → 工具调用前 → 执行 → 工具调用后 → 权限控制</div>
+    </div>
+  </div>
+  <div class="sub">
+    <h3>配置示例</h3>
+    <p>钩子配置在 <code>settings.json</code> 或 <code>.claude/settings.json</code> 中定义：</p>
+    <div class="tabs">
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(this,'hook-ex')">阻止危险命令</button>
+        <button class="tab-btn" onclick="switchTab(this,'hook-ex')">自动格式化</button>
+        <button class="tab-btn" onclick="switchTab(this,'hook-ex')">权限自动批准</button>
+      </div>
+      <div class="tab-panel active" data-tab-group="hook-ex">
+        <div class="code-block"><div class="code-header"><span class="lang">json</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">{
+  "hooks": {
+    "PreToolUse": [{
+      "matcher": "Bash",
+      "hooks": [{
+        "type": "command",
+        "if": "Bash(rm -rf *)",
+        "command": "echo '⛔ 危险命令已拦截！'"
+      }]
+    }]
+  }
+}</div></div>
+      </div>
+      <div class="tab-panel" data-tab-group="hook-ex">
+        <div class="code-block"><div class="code-header"><span class="lang">json</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">{
+  "hooks": {
+    "PostToolUse": [{
+      "matcher": "Write|Edit",
+      "hooks": [{
+        "type": "command",
+        "command": "prettier --write $FILE",
+        "async": true
+      }]
+    }]
+  }
+}</div></div>
+      </div>
+      <div class="tab-panel" data-tab-group="hook-ex">
+        <div class="code-block"><div class="code-header"><span class="lang">json</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">{
+  "hooks": {
+    "PermissionRequest": [{
+      "matcher": "Bash(npm test *)",
+      "hooks": [{
+        "type": "command",
+        "command": "echo 'approve'"
+      }]
+    }]
+  }
+}</div></div>
+      </div>
+    </div>
+    <div class="tip"><strong>💡 提示：</strong>使用 <code>/hooks</code> 命令查看当前所有已配置的钩子。</div>
+  </div>
+</section>
+
+<!-- ===================== SKILLS ===================== -->
+<section class="section" id="skills">
+  <h2 class="section-title">🎯 技能 (Skills) <span class="badge badge-advanced">高级</span></h2>
+  <div class="sub">
+    <h3>技能系统概述</h3>
+    <p>Skills 是基于提示词的可复用工作流，使用 <code>/skill-name</code> 调用。可以封装常用操作为自定义命令。</p>
+    <div class="card">
+      <h4>📁 技能文件结构</h4>
+      <div class="code-block" style="margin:8px 0"><div class="code-header"><span class="lang">text</span></div><div class="code-body">.claude/
+└── commands/
+    ├── review-pr.md      # /review-pr 技能
+    ├── deploy-staging.md # /deploy-staging 技能
+    └── gen-api-docs.md   # /gen-api-docs 技能</div></div>
+    </div>
+  </div>
+  <div class="sub">
+    <h3>创建自定义技能</h3>
+    <div class="code-block"><div class="code-header"><span class="lang">markdown (.claude/commands/review-pr.md)</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">---
+description: 审查当前分支的 Pull Request
+---
+
+请审查当前分支相对于 main 分支的所有代码变更：
+
+1. 列出所有变更文件
+2. 对每个文件进行代码审查，关注：
+   - 代码质量和可读性
+   - 潜在的 bug 或安全问题
+   - 性能问题
+   - 是否符合项目的编码规范
+3. 给出总体评价和改进建议
+4. 如果发现严重问题，标注为 🔴 critical</div></div>
+  </div>
+  <div class="sub">
+    <h3>使用技能</h3>
+    <div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 在交互模式中调用自定义技能
+> /review-pr
+
+# 调用内置技能
+> /batch "将所有 console.log 替换为 logger"
+> /loop 30 "运行测试，修复失败的用例"
+> /debug "登录接口返回 500 错误"</div></div>
+  </div>
+</section>
+
+<!-- ===================== MCP ===================== -->
+<section class="section" id="mcp">
+  <h2 class="section-title">🌐 MCP 集成 <span class="badge badge-advanced">高级</span></h2>
+  <div class="sub">
+    <h3>什么是 MCP？</h3>
+    <p>Model Context Protocol 让 Claude Code 连接外部数据源（如 Google Drive、Jira、Slack、数据库等），实现跨工具协作。</p>
+    <!-- SVG: MCP architecture -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+        <rect x="240" y="50" width="200" height="60" rx="10" fill="rgba(217,119,6,.1)" stroke="#d97706" stroke-width="2"/>
+        <text x="340" y="75" text-anchor="middle" fill="#f59e0b" font-size="15" font-weight="700">Claude Code</text>
+        <text x="340" y="95" text-anchor="middle" fill="#8b949e" font-size="11">MCP Client</text>
+        <!-- Servers -->
+        <rect x="20" y="15" width="130" height="45" rx="8" fill="#161b22" stroke="#3fb950"/>
+        <text x="85" y="42" text-anchor="middle" fill="#3fb950" font-size="12" font-weight="600">📁 Google Drive</text>
+        <rect x="20" y="70" width="130" height="45" rx="8" fill="#161b22" stroke="#58a6ff"/>
+        <text x="85" y="97" text-anchor="middle" fill="#58a6ff" font-size="12" font-weight="600">📋 Jira</text>
+        <rect x="20" y="125" width="130" height="30" rx="8" fill="#161b22" stroke="#bc8cff"/>
+        <text x="85" y="145" text-anchor="middle" fill="#bc8cff" font-size="11" font-weight="600">💬 Slack</text>
+        <rect x="530" y="15" width="130" height="45" rx="8" fill="#161b22" stroke="#f0883e"/>
+        <text x="595" y="42" text-anchor="middle" fill="#f0883e" font-size="12" font-weight="600">🗄️ PostgreSQL</text>
+        <rect x="530" y="70" width="130" height="45" rx="8" fill="#161b22" stroke="#f85149"/>
+        <text x="595" y="97" text-anchor="middle" fill="#f85149" font-size="12" font-weight="600">🐙 GitHub</text>
+        <rect x="530" y="125" width="130" height="30" rx="8" fill="#161b22" stroke="#8b949e"/>
+        <text x="595" y="145" text-anchor="middle" fill="#8b949e" font-size="11" font-weight="600">🔧 自定义服务</text>
+        <line x1="152" y1="80" x2="238" y2="80" stroke="#30363d" stroke-width="1.5" stroke-dasharray="4"/>
+        <line x1="442" y1="80" x2="528" y2="80" stroke="#30363d" stroke-width="1.5" stroke-dasharray="4"/>
+        <text x="195" y="72" fill="#8b949e" font-size="9">MCP</text>
+        <text x="485" y="72" fill="#8b949e" font-size="9">MCP</text>
+      </svg>
+      <div class="svg-caption">MCP 架构：Claude Code 通过标准协议连接多种外部服务</div>
+    </div>
+  </div>
+  <div class="sub">
+    <h3>配置 MCP 服务器</h3>
+    <div class="code-block"><div class="code-header"><span class="lang">json (~/.claude/mcp.json)</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">{
+  "mcpServers": {
+    "jira": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-jira"],
+      "env": { "JIRA_API_TOKEN": "your-token" }
+    },
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-postgres"],
+      "env": { "DATABASE_URL": "postgresql://..." }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-filesystem", "/path/to/dir"]
+    }
+  }
+}</div></div>
+    <div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 配置后，在对话中直接引用 MCP 资源
+> 查看 @jira:PROJ-123 的详情
+> 在 @postgres:users 表中查找活跃用户
+> 读取 @filesystem:docs/README.md 的内容</div></div>
+  </div>
+</section>
+
+<!-- ===================== MULTI-AGENT ===================== -->
+<section class="section" id="multi-agent">
+  <h2 class="section-title">🤖 多代理协作 <span class="badge badge-advanced">高级</span></h2>
+  <div class="sub">
+    <h3>多代理工作模式</h3>
+    <p>Claude Code 支持同时运行多个代理实例，由主代理协调完成复杂任务。</p>
+    <!-- SVG: Multi-agent -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 660 180" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+        <rect x="230" y="65" width="200" height="50" rx="10" fill="rgba(217,119,6,.12)" stroke="#d97706" stroke-width="2"/>
+        <text x="330" y="87" text-anchor="middle" fill="#f59e0b" font-size="14" font-weight="700">主代理 (Coordinator)</text>
+        <text x="330" y="104" text-anchor="middle" fill="#8b949e" font-size="10">任务分解与结果合并</text>
+        <rect x="30" y="10" width="140" height="50" rx="8" fill="#161b22" stroke="#3fb950"/>
+        <text x="100" y="35" text-anchor="middle" fill="#3fb950" font-size="12" font-weight="600">代理 A</text>
+        <text x="100" y="50" text-anchor="middle" fill="#8b949e" font-size="9">前端开发</text>
+        <rect x="30" y="75" width="140" height="50" rx="8" fill="#161b22" stroke="#58a6ff"/>
+        <text x="100" y="100" text-anchor="middle" fill="#58a6ff" font-size="12" font-weight="600">代理 B</text>
+        <text x="100" y="115" text-anchor="middle" fill="#8b949e" font-size="9">后端 API</text>
+        <rect x="30" y="140" width="140" height="30" rx="8" fill="#161b22" stroke="#bc8cff"/>
+        <text x="100" y="160" text-anchor="middle" fill="#bc8cff" font-size="11" font-weight="600">代理 C · 测试</text>
+        <rect x="490" y="10" width="140" height="50" rx="8" fill="#161b22" stroke="#f0883e"/>
+        <text x="560" y="35" text-anchor="middle" fill="#f0883e" font-size="12" font-weight="600">代理 D</text>
+        <text x="560" y="50" text-anchor="middle" fill="#8b949e" font-size="9">代码审查</text>
+        <rect x="490" y="75" width="140" height="50" rx="8" fill="#161b22" stroke="#f85149"/>
+        <text x="560" y="100" text-anchor="middle" fill="#f85149" font-size="12" font-weight="600">代理 E</text>
+        <text x="560" y="115" text-anchor="middle" fill="#8b949e" font-size="9">文档编写</text>
+        <line x1="170" y1="85" x2="228" y2="85" stroke="#30363d" stroke-width="1.5"/>
+        <line x1="432" y1="85" x2="488" y2="85" stroke="#30363d" stroke-width="1.5"/>
+      </svg>
+      <div class="svg-caption">多代理协作架构：主代理拆分任务，子代理并行执行</div>
+    </div>
+    <div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 使用 --worktree 在不同分支上并行运行多个代理
+# 终端 1
+claude --worktree feat-ui "实现新的用户界面组件"
+
+# 终端 2
+claude --worktree feat-api "实现对应的 REST API"
+
+# 终端 3
+claude --worktree feat-tests "编写端到端测试"
+
+# 使用 /batch 进行大规模并行变更
+> /batch "将所有 .js 文件迁移为 .ts"</div></div>
+  </div>
+</section>
+
+<!-- ===================== CI/CD ===================== -->
+<section class="section" id="ci-cd">
+  <h2 class="section-title">🚢 CI/CD 自动化 <span class="badge badge-advanced">高级</span></h2>
+  <div class="sub">
+    <h3>GitHub Actions 集成</h3>
+    <div class="code-block"><div class="code-header"><span class="lang">yaml (.github/workflows/claude-review.yml)</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">name: Claude Code Review
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run Claude Review
+        run: |
+          npm install -g @anthropic-ai/claude-code
+          claude -p --output-format json \
+            "审查这个 PR 的所有代码变更，给出改进建议" \
+            | jq -r '.result' > review.md
+      - name: Post Review Comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const review = fs.readFileSync('review.md', 'utf8');
+            github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: context.issue.number,
+              body: review
+            });</div></div>
+  </div>
+  <div class="sub">
+    <h3>定时任务</h3>
+    <div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 使用 /schedule 创建云端定时任务（即使电脑关机也能运行）
+> /schedule "每天检查依赖更新，如果有安全漏洞就创建 PR"
+
+# 使用 /loop 在会话中循环执行
+> /loop 60 "运行测试套件，如果有失败就尝试修复"</div></div>
+  </div>
+</section>
+
+<!-- ===================== PERMISSIONS ===================== -->
+<section class="section" id="permissions">
+  <h2 class="section-title">🔐 权限与安全模式 <span class="badge badge-advanced">高级</span></h2>
+  <div class="sub">
+    <h3>为什么权限管理很重要？</h3>
+    <p>AI 编程工具可以读写文件、执行 Shell 命令、访问网络。如果不加控制，AI 可能会误删重要文件、执行危险命令或泄露敏感数据。权限管理系统让你在效率和安全性之间找到平衡。</p>
+    <!-- SVG: Permission levels -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+        <rect x="10" y="30" width="150" height="60" rx="10" fill="rgba(63,185,80,.08)" stroke="#3fb950" stroke-width="1.5"/>
+        <text x="85" y="55" text-anchor="middle" fill="#3fb950" font-size="13" font-weight="700">🔒 严格模式</text>
+        <text x="85" y="75" text-anchor="middle" fill="#8b949e" font-size="10">每步需确认</text>
+        <rect x="185" y="30" width="150" height="60" rx="10" fill="rgba(88,166,255,.08)" stroke="#58a6ff" stroke-width="1.5"/>
+        <text x="260" y="55" text-anchor="middle" fill="#58a6ff" font-size="13" font-weight="700">📋 计划模式</text>
+        <text x="260" y="75" text-anchor="middle" fill="#8b949e" font-size="10">先看计划再执行</text>
+        <rect x="360" y="30" width="150" height="60" rx="10" fill="rgba(217,119,6,.08)" stroke="#d97706" stroke-width="1.5"/>
+        <text x="435" y="55" text-anchor="middle" fill="#d97706" font-size="13" font-weight="700">⚡ 自动模式</text>
+        <text x="435" y="75" text-anchor="middle" fill="#8b949e" font-size="10">智能风险判断</text>
+        <rect x="540" y="30" width="150" height="60" rx="10" fill="rgba(248,81,73,.1)" stroke="#f85149" stroke-width="2"/>
+        <text x="615" y="55" text-anchor="middle" fill="#f85149" font-size="13" font-weight="700">🔥 YOLO 模式</text>
+        <text x="615" y="75" text-anchor="middle" fill="#8b949e" font-size="10">全部放行</text>
+        <line x1="162" y1="60" x2="183" y2="60" stroke="#30363d" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <line x1="337" y1="60" x2="358" y2="60" stroke="#30363d" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <line x1="512" y1="60" x2="538" y2="60" stroke="#30363d" stroke-width="1.5" marker-end="url(#ar3)"/>
+        <text x="350" y="18" text-anchor="middle" fill="#8b949e" font-size="11">安全 ←————————————————————→ 效率</text>
+        <defs><marker id="ar3" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0,0 6,2.5 0,5" fill="#30363d"/></marker></defs>
+      </svg>
+      <div class="svg-caption">权限模式光谱：从最安全到最高效，选择适合你场景的模式</div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Claude Code 权限管理</h3>
+    <p>Claude Code 提供 6 种权限模式，通过 <code>settings.json</code> 配置：</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>模式</th><th>说明</th><th>安全级别</th></tr></thead>
+      <tbody>
+        <tr><td><code>default</code></td><td>默认模式，每次有副作用操作都询问</td><td>🔒 最安全</td></tr>
+        <tr><td><code>plan</code></td><td>先展示执行计划，批准后再操作</td><td>🔒 安全</td></tr>
+        <tr><td><code>acceptEdits</code></td><td>自动接受文件编辑，命令仍需确认</td><td>🔓 较安全</td></tr>
+        <tr><td><code>auto</code></td><td>自动模式，用分类器判断风险高低</td><td>🔓 中等</td></tr>
+        <tr><td><code>dontAsk</code></td><td>不询问，但受 allow/deny 规则约束</td><td>⚠️ 需谨慎</td></tr>
+        <tr><td><code>bypassPermissions</code></td><td>绕过所有权限检查（YOLO）</td><td>🔴 危险</td></tr>
+      </tbody>
+    </table></div>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — Claude Code 开启 YOLO</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 方式 1：命令行临时启用
+claude --dangerously-skip-permissions
+
+# 方式 2：设为默认模式（settings.json）
+# { "permissions": { "defaultMode": "bypassPermissions" } }
+
+# 推荐：精细控制权限
+# {
+#   "permissions": {
+#     "allow": ["Bash(npm test *)", "Bash(git *)", "Read(./src/**)"],
+#     "deny":  ["Bash(rm -rf *)", "Read(./.env)", "Read(./secrets/**)"]
+#   }
+# }</div></div>
+  </div>
+
+  <div class="sub">
+    <h3>OpenAI Codex CLI 权限管理</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>级别</th><th>功能范围</th><th>适用场景</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Read Only</strong></td><td>仅读取文件</td><td>代码审查、学习</td></tr>
+        <tr><td><strong>Auto</strong></td><td>读写文件 + 运行命令（需确认）</td><td>一般开发</td></tr>
+        <tr><td><strong>Full Access</strong></td><td>完整权限 + 网络访问</td><td>完整开发流程</td></tr>
+      </tbody>
+    </table></div>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — Codex 开启 YOLO</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 命令行一键开启
+codex --dangerously-bypass-approvals-and-sandbox
+
+# 或在 config.toml 中配置
+# ~/.codex/config.toml:
+# approval_policy = "never"
+# sandbox_mode = "workspace-write"
+# [sandbox_workspace_write]
+# network_access = true</div></div>
+  </div>
+
+  <div class="sub">
+    <h3>三大工具 YOLO 模式速查</h3>
+    <div class="card">
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>工具</th><th>YOLO 启动命令</th><th>配置文件</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Claude Code</strong></td><td><code>claude --dangerously-skip-permissions</code></td><td><code>~/.claude/settings.json</code></td></tr>
+          <tr><td><strong>OpenAI Codex</strong></td><td><code>codex --dangerously-bypass-approvals-and-sandbox</code></td><td><code>~/.codex/config.toml</code></td></tr>
+          <tr><td><strong>Gemini CLI</strong></td><td><code>gemini --yolo</code></td><td><code>~/.gemini/settings.json</code></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>安全最佳实践</h3>
+    <div class="warn"><strong>⚠️ 警告：</strong>YOLO 模式下 AI 可以执行任何命令、访问网络、修改/删除文件。请务必在受控环境中使用。</div>
+    <div class="card" style="margin-top:12px">
+      <h4>✅ 推荐做法</h4>
+      <ul>
+        <li><strong>优先用 allow/deny 规则</strong>而不是直接开 YOLO，精细控制权限</li>
+        <li><strong>在隔离环境使用 YOLO</strong>：Docker 容器、虚拟机或临时项目</li>
+        <li><strong>团队环境禁止 YOLO</strong>：管理员可通过 managed settings 禁用</li>
+        <li><strong>定期审查权限配置</strong>：使用 <code>/status</code> 或 <code>/approvals</code> 查看</li>
+        <li><strong>利用沙盒模式</strong>（Claude Code 的 <code>/sandbox</code>）作为安全替代方案</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SUB-AGENTS ===================== -->
+<section class="section" id="sub-agents">
+  <h2 class="section-title">🧩 子代理系统 <span class="badge badge-advanced">高级</span></h2>
+  <div class="sub">
+    <h3>什么是子代理？</h3>
+    <p>Claude Code 的子代理（Sub-agents）是主会话中生成的独立 AI 代理实例，用于处理复杂任务中的子任务。主代理扮演"协调者"角色，将大任务拆分为多个并行子任务，分配给子代理执行，最后汇总结果。</p>
+    <!-- SVG: Sub-agent architecture -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+        <!-- Main agent -->
+        <rect x="240" y="70" width="200" height="60" rx="12" fill="rgba(217,119,6,.12)" stroke="#d97706" stroke-width="2"/>
+        <text x="340" y="95" text-anchor="middle" fill="#f59e0b" font-size="14" font-weight="700">主代理 (Parent)</text>
+        <text x="340" y="115" text-anchor="middle" fill="#8b949e" font-size="10">任务拆分 · 结果汇总</text>
+        <!-- Sub-agents -->
+        <rect x="20" y="10" width="150" height="50" rx="8" fill="#161b22" stroke="#3fb950" stroke-width="1.5"/>
+        <text x="95" y="32" text-anchor="middle" fill="#3fb950" font-size="12" font-weight="600">子代理 A</text>
+        <text x="95" y="48" text-anchor="middle" fill="#8b949e" font-size="10">代码探索</text>
+        <rect x="20" y="70" width="150" height="50" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="1.5"/>
+        <text x="95" y="92" text-anchor="middle" fill="#58a6ff" font-size="12" font-weight="600">子代理 B</text>
+        <text x="95" y="108" text-anchor="middle" fill="#8b949e" font-size="10">文件编写</text>
+        <rect x="20" y="130" width="150" height="50" rx="8" fill="#161b22" stroke="#bc8cff" stroke-width="1.5"/>
+        <text x="95" y="152" text-anchor="middle" fill="#bc8cff" font-size="12" font-weight="600">子代理 C</text>
+        <text x="95" y="168" text-anchor="middle" fill="#8b949e" font-size="10">测试验证</text>
+        <!-- Right sub-agents -->
+        <rect x="510" y="10" width="150" height="50" rx="8" fill="#161b22" stroke="#f0883e" stroke-width="1.5"/>
+        <text x="585" y="32" text-anchor="middle" fill="#f0883e" font-size="12" font-weight="600">子代理 D</text>
+        <text x="585" y="48" text-anchor="middle" fill="#8b949e" font-size="10">文档编写</text>
+        <rect x="510" y="70" width="150" height="50" rx="8" fill="#161b22" stroke="#f85149" stroke-width="1.5"/>
+        <text x="585" y="92" text-anchor="middle" fill="#f85149" font-size="12" font-weight="600">子代理 E</text>
+        <text x="585" y="108" text-anchor="middle" fill="#8b949e" font-size="10">代码审查</text>
+        <!-- Arrows -->
+        <line x1="172" y1="85" x2="238" y2="95" stroke="#30363d" stroke-width="1.5" stroke-dasharray="4"/>
+        <line x1="442" y1="95" x2="508" y2="85" stroke="#30363d" stroke-width="1.5" stroke-dasharray="4"/>
+        <!-- Label -->
+        <text x="340" y="155" text-anchor="middle" fill="#8b949e" font-size="10">子代理在独立沙盒中运行，结果汇总回主代理</text>
+      </svg>
+      <div class="svg-caption">子代理架构：主代理协调，子代理并行执行子任务</div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>两种子代理模式</h3>
+    <div class="tabs">
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(this,'sa-mode')">Task 子代理</button>
+        <button class="tab-btn" onclick="switchTab(this,'sa-mode')">Agent Teams（实验性）</button>
+      </div>
+      <div class="tab-panel active" data-tab-group="sa-mode">
+        <div class="card">
+          <h4>🔧 Task 子代理（内置于 Claude Code）</h4>
+          <ul>
+            <li><strong>会话内</strong>：子代理在当前会话中同步运行</li>
+            <li><strong>适用</strong>：代码探索、文件搜索、批量修改</li>
+            <li><strong>特点</strong>：共享上下文、结果直接返回主代理</li>
+            <li><strong>触发</strong>：Claude 自动判断何时需要创建子代理</li>
+          </ul>
+        </div>
+        <div class="code-block" style="margin-top:12px"><div class="code-header"><span class="lang">bash — 使用场景</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># Claude 自动使用子代理的场景（无需手动触发）
+claude "分析这个项目的架构，找出所有模块间的依赖关系"
+
+# 复杂重构 — Claude 会自动创建子代理处理不同模块
+claude "将项目从 JavaScript 迁移到 TypeScript，包括所有测试文件"
+
+# 大规模代码审查 — 子代理并行审查不同目录
+claude "对整个 src/ 目录进行代码审查，重点关注安全性问题"</div></div>
+      </div>
+      <div class="tab-panel" data-tab-group="sa-mode">
+        <div class="card">
+          <h4>🧪 Agent Teams（实验性功能）</h4>
+          <ul>
+            <li><strong>多实例</strong>：创建多个独立 Claude Code 进程</li>
+            <li><strong>异步</strong>：子代理在后台运行，通过消息通信</li>
+            <li><strong>持久化</strong>：每个代理有独立的对话历史</li>
+            <li><strong>通信</strong>：代理之间通过 <code>send_message</code> 交换信息</li>
+          </ul>
+        </div>
+        <div class="warn" style="margin-top:12px"><strong>⚠️ 实验性功能：</strong>Agent Teams 目前仍处于实验阶段，API 可能随时变化。生产环境慎用。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>子代理 vs 多代理对比</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>特性</th><th>Task 子代理</th><th>Agent Teams</th><th>Worktree 并行</th></tr></thead>
+      <tbody>
+        <tr><td><strong>运行方式</strong></td><td>同步、会话内</td><td>异步、多实例</td><td>独立终端</td></tr>
+        <tr><td><strong>上下文共享</strong></td><td>共享主会话</td><td>独立上下文</td><td>完全独立</td></tr>
+        <tr><td><strong>通信机制</strong></td><td>直接返回结果</td><td>消息传递</td><td>无（需手动协调）</td></tr>
+        <tr><td><strong>适用规模</strong></td><td>中小任务</td><td>大型复杂任务</td><td>中等任务</td></tr>
+        <tr><td><strong>稳定性</strong></td><td>✅ 稳定</td><td>⚠️ 实验性</td><td>✅ 稳定</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ===================== MEMORY ===================== -->
+<section class="section" id="memory">
+  <h2 class="section-title">🧠 记忆系统 <span class="badge badge-advanced">高级</span></h2>
+  <div class="sub">
+    <h3>记忆系统概述</h3>
+    <p>Claude Code 的记忆系统让它能够"记住"跨会话的信息，如项目偏好、编码规范、常见决策等。记忆分为<strong>手动配置</strong>（CLAUDE.md）和<strong>自动学习</strong>（Auto Memory）两种方式。</p>
+    <!-- SVG: Memory system -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 680 180" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+        <!-- Manual memory -->
+        <rect x="30" y="20" width="280" height="140" rx="12" fill="rgba(217,119,6,.06)" stroke="#d97706" stroke-width="1.5"/>
+        <text x="170" y="48" text-anchor="middle" fill="#f59e0b" font-size="14" font-weight="700">📝 手动记忆</text>
+        <rect x="55" y="62" width="230" height="28" rx="6" fill="#161b22" stroke="#bc8cff"/>
+        <text x="170" y="81" text-anchor="middle" fill="#bc8cff" font-size="11">~/.claude/CLAUDE.md（全局偏好）</text>
+        <rect x="55" y="98" width="230" height="28" rx="6" fill="#161b22" stroke="#3fb950"/>
+        <text x="170" y="117" text-anchor="middle" fill="#3fb950" font-size="11">项目 CLAUDE.md（团队共享）</text>
+        <rect x="55" y="134" width="230" height="18" rx="4" fill="#161b22" stroke="#58a6ff"/>
+        <text x="170" y="148" text-anchor="middle" fill="#58a6ff" font-size="9">.claude/rules/*.md（规则文件）</text>
+        <!-- Auto memory -->
+        <rect x="370" y="20" width="280" height="140" rx="12" fill="rgba(63,185,80,.06)" stroke="#3fb950" stroke-width="1.5"/>
+        <text x="510" y="48" text-anchor="middle" fill="#3fb950" font-size="14" font-weight="700">🔄 自动记忆</text>
+        <rect x="395" y="62" width="230" height="28" rx="6" fill="#161b22" stroke="#f0883e"/>
+        <text x="510" y="81" text-anchor="middle" fill="#f0883e" font-size="11">~/.claude/projects/&lt;hash&gt;/memory/</text>
+        <rect x="395" y="98" width="230" height="28" rx="6" fill="#161b22" stroke="#8b949e"/>
+        <text x="510" y="117" text-anchor="middle" fill="#8b949e" font-size="11">Claude 自动写入学习笔记</text>
+        <rect x="395" y="134" width="230" height="18" rx="4" fill="#161b22" stroke="#30363d"/>
+        <text x="510" y="148" text-anchor="middle" fill="#8b949e" font-size="9">用 /memory 查看和管理</text>
+        <!-- Arrow -->
+        <line x1="312" y1="90" x2="368" y2="90" stroke="#30363d" stroke-width="1.5" stroke-dasharray="4"/>
+        <text x="340" y="82" fill="#8b949e" font-size="9">互补</text>
+      </svg>
+      <div class="svg-caption">Claude Code 记忆系统：手动配置 + 自动学习，双管齐下</div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>手动记忆配置</h3>
+    <p>手动记忆是你主动编写的指令文件，Claude Code 每次启动时会自动读取：</p>
+    <div class="tabs">
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(this,'mem-manual')">用户级 CLAUDE.md</button>
+        <button class="tab-btn" onclick="switchTab(this,'mem-manual')">项目级 CLAUDE.md</button>
+        <button class="tab-btn" onclick="switchTab(this,'mem-manual')">规则文件</button>
+      </div>
+      <div class="tab-panel active" data-tab-group="mem-manual">
+        <div class="code-block"><div class="code-header"><span class="lang">bash — 创建全局偏好</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 创建用户级 CLAUDE.md（所有项目生效）
+mkdir -p ~/.claude
+cat > ~/.claude/CLAUDE.md << 'EOF'
+# 个人偏好
+
+## 语言
+- 始终使用中文回复
+- 代码注释使用中文
+
+## 编码风格
+- 优先使用 TypeScript
+- 使用 2 空格缩进
+- 优先使用函数式编程
+
+## 工具偏好
+- 使用 pnpm 而非 npm
+- 使用 Vitest 而非 Jest
+EOF</div></div>
+      </div>
+      <div class="tab-panel" data-tab-group="mem-manual">
+        <div class="code-block"><div class="code-header"><span class="lang">bash — 初始化项目记忆</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 方式 1：使用 /init 命令自动生成
+claude
+> /init
+
+# 方式 2：手动创建
+cat > CLAUDE.md << 'EOF'
+# 项目规范
+
+## 架构
+- 这是一个 Next.js 14 项目
+- 使用 App Router
+
+## 测试
+- 运行测试：pnpm test
+- 测试文件放在 __tests__/ 目录
+
+## 注意事项
+- 不要修改 prisma/schema.prisma（由 DBA 管理）
+- API 路由必须添加错误处理
+EOF</div></div>
+      </div>
+      <div class="tab-panel" data-tab-group="mem-manual">
+        <div class="code-block"><div class="code-header"><span class="lang">text — 规则文件目录结构</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">.claude/
+├── CLAUDE.md          # 主配置
+└── rules/
+    ├── typescript.md  # TS 编码规范
+    ├── testing.md     # 测试规范
+    ├── api-design.md  # API 设计约定
+    └── security.md    # 安全规范
+
+# .claude/rules/security.md 示例：
+# - 所有 API 端点必须有认证中间件
+# - 用户输入必须经过验证和转义
+# - 敏感数据不得记录到日志</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>自动记忆管理</h3>
+    <p>自动记忆存储在 <code>~/.claude/projects/&lt;hash&gt;/memory/</code> 目录下，Claude 会在对话中自动学习并保存有用的信息。</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>命令</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td><code>/memory</code></td><td>查看当前项目的所有自动记忆</td></tr>
+        <tr><td><code>/memory edit</code></td><td>编辑自动记忆文件</td></tr>
+        <tr><td><code>claude --no-memory</code></td><td>启动时不加载自动记忆</td></tr>
+      </tbody>
+    </table></div>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 管理自动记忆</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 查看自动记忆存储位置
+ls ~/.claude/projects/*/memory/
+
+# 查看某个项目的记忆文件
+cat ~/.claude/projects/$(echo -n "$(pwd)" | shasum | cut -c1-8)/memory/*.md
+
+# 禁用自动记忆启动
+claude --no-memory
+
+# 在对话中让 Claude 记住信息
+claude
+> 请记住：这个项目使用 pnpm 作为包管理器，不要使用 npm</div></div>
+  </div>
+
+  <div class="sub">
+    <h3>增加/减少记忆的技巧</h3>
+    <div class="card">
+      <h4>✅ 增加记忆的方法</h4>
+      <ul>
+        <li><strong>直接告诉 Claude</strong>：在对话中说"请记住 XXX"，Claude 会自动保存到记忆文件</li>
+        <li><strong>编写 CLAUDE.md</strong>：将团队规范、架构决策写入项目级配置文件</li>
+        <li><strong>使用 /init</strong>：Claude 分析项目后自动生成初始配置</li>
+        <li><strong>rules 文件</strong>：按主题拆分规则，保持 CLAUDE.md 简洁</li>
+      </ul>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <h4>🗑️ 减少/清理记忆的方法</h4>
+      <ul>
+        <li><strong>/memory edit</strong>：直接编辑自动记忆文件，删除不需要的内容</li>
+        <li><strong>手动删除</strong>：<code>rm ~/.claude/projects/&lt;hash&gt;/memory/*.md</code></li>
+        <li><strong>--no-memory</strong>：临时跳过自动记忆加载</li>
+        <li><strong>精简 CLAUDE.md</strong>：控制在 200 行以内，避免指令过多导致忽略</li>
+      </ul>
+    </div>
+    <div class="tip"><strong>💡 最佳实践：</strong>手动记忆用于<strong>稳定不变</strong>的规范（编码风格、架构约定），自动记忆用于<strong>动态学习</strong>的信息（用户偏好、项目特殊处理）。两者互补效果最佳。</div>
+  </div>
+</section>
+
+<!-- ===================== CHANNELS ===================== -->
+<section class="section" id="channels">
+  <h2 class="section-title">💬 即时通讯集成 <span class="badge badge-advanced">高级</span></h2>
+  <div class="sub">
+    <h3>通过消息平台使用 Claude</h3>
+    <p>Claude Code 支持通过即时通讯平台接收消息并进行编程操作，让你在手机上也能远程控制代码编写。（v2.1.80+ 实验性功能）</p>
+    <!-- SVG: Channels -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 680 150" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+        <!-- Center: Claude -->
+        <rect x="240" y="40" width="200" height="70" rx="12" fill="rgba(217,119,6,.12)" stroke="#d97706" stroke-width="2"/>
+        <text x="340" y="70" text-anchor="middle" fill="#f59e0b" font-size="15" font-weight="700">Claude Code</text>
+        <text x="340" y="92" text-anchor="middle" fill="#8b949e" font-size="11">Channels Plugin</text>
+        <!-- Messaging apps -->
+        <rect x="15" y="15" width="120" height="50" rx="8" fill="#161b22" stroke="#229ED9"/>
+        <text x="75" y="40" text-anchor="middle" fill="#229ED9" font-size="13" font-weight="600">📱 Telegram</text>
+        <text x="75" y="55" text-anchor="middle" fill="#8b949e" font-size="9">Telegram Bot</text>
+        <rect x="15" y="75" width="120" height="50" rx="8" fill="#161b22" stroke="#5865F2"/>
+        <text x="75" y="100" text-anchor="middle" fill="#5865F2" font-size="13" font-weight="600">🎮 Discord</text>
+        <text x="75" y="115" text-anchor="middle" fill="#8b949e" font-size="9">Discord Bot</text>
+        <rect x="545" y="15" width="120" height="50" rx="8" fill="#161b22" stroke="#34C759"/>
+        <text x="605" y="40" text-anchor="middle" fill="#34C759" font-size="13" font-weight="600">💬 iMessage</text>
+        <text x="605" y="55" text-anchor="middle" fill="#8b949e" font-size="9">AppleScript</text>
+        <rect x="545" y="75" width="120" height="50" rx="8" fill="#161b22" stroke="#07C160"/>
+        <text x="605" y="100" text-anchor="middle" fill="#07C160" font-size="13" font-weight="600">💚 微信</text>
+        <text x="605" y="115" text-anchor="middle" fill="#8b949e" font-size="9">第三方方案</text>
+        <!-- Arrows -->
+        <line x1="137" y1="75" x2="238" y2="75" stroke="#30363d" stroke-width="1.5" stroke-dasharray="4"/>
+        <line x1="442" y1="75" x2="543" y2="75" stroke="#30363d" stroke-width="1.5" stroke-dasharray="4"/>
+      </svg>
+      <div class="svg-caption">Claude Code Channels：通过即时通讯平台远程控制编程</div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>支持的消息平台</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>平台</th><th>集成方式</th><th>状态</th><th>适用场景</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Telegram</strong></td><td>Bot API 插件</td><td>✅ 实验性</td><td>移动端远程编程、团队通知</td></tr>
+        <tr><td><strong>Discord</strong></td><td>Bot 插件</td><td>✅ 实验性</td><td>社区开发、团队协作</td></tr>
+        <tr><td><strong>iMessage</strong></td><td>AppleScript 桥接</td><td>⚠️ macOS</td><td>个人使用、快速指令</td></tr>
+        <tr><td><strong>Slack</strong></td><td>MCP 服务器</td><td>✅ 稳定</td><td>企业协作、CI/CD 通知</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="sub">
+    <h3>配置示例：Telegram Bot</h3>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 配置 Claude Code Telegram 频道</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 1. 创建 Telegram Bot（通过 @BotFather）
+#    获取 Bot Token
+
+# 2. 在 Claude Code 中启用频道
+claude
+> /channels
+
+# 3. 选择 Telegram，输入 Bot Token
+#    Claude Code 会显示一个验证码
+
+# 4. 在 Telegram 中向 Bot 发送验证码
+# 5. 配置完成！现在可以通过 Telegram 发消息给 Claude
+
+# 使用示例（在 Telegram 中发送）：
+# "帮我在项目中添加一个用户注册 API"
+# "运行测试看看有没有失败的"
+# "查看最近的 Git 提交记录"</div></div>
+    <div class="warn"><strong>⚠️ 安全提示：</strong>即时通讯集成会将 Claude Code 的部分功能暴露给消息平台。建议仅用于个人开发环境，避免在生产服务器上使用。务必启用消息来源验证。</div>
+  </div>
+</section>
+
+<!-- ===================== DESKTOP ===================== -->
+<section class="section" id="desktop">
+  <h2 class="section-title">🖥️ 桌面端应用 <span class="badge badge-advanced">高级</span></h2>
+  <div class="sub">
+    <h3>官方 Claude Desktop</h3>
+    <p>Claude Desktop 是 Anthropic 官方推出的桌面应用，提供图形化界面来与 Claude 交互，支持文件拖拽、多窗口、快捷键等特性。</p>
+    <!-- SVG: Desktop apps -->
+    <div class="svg-wrap">
+      <svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,sans-serif">
+        <!-- Official -->
+        <rect x="30" y="20" width="180" height="120" rx="12" fill="rgba(217,119,6,.08)" stroke="#d97706" stroke-width="2"/>
+        <text x="120" y="48" text-anchor="middle" fill="#f59e0b" font-size="13" font-weight="700">🏛️ 官方应用</text>
+        <rect x="50" y="60" width="140" height="30" rx="6" fill="#161b22" stroke="#d97706"/>
+        <text x="120" y="80" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="600">Claude Desktop</text>
+        <rect x="50" y="98" width="140" height="28" rx="6" fill="#161b22" stroke="#d97706" stroke-dasharray="4"/>
+        <text x="120" y="117" text-anchor="middle" fill="#8b949e" font-size="10">VS Code / JetBrains</text>
+        <!-- Open source -->
+        <rect x="250" y="20" width="180" height="120" rx="12" fill="rgba(63,185,80,.06)" stroke="#3fb950" stroke-width="1.5"/>
+        <text x="340" y="48" text-anchor="middle" fill="#3fb950" font-size="13" font-weight="700">📦 开源替代</text>
+        <rect x="270" y="60" width="140" height="24" rx="5" fill="#161b22" stroke="#3fb950"/>
+        <text x="340" y="77" text-anchor="middle" fill="#3fb950" font-size="10">OpenCode</text>
+        <rect x="270" y="90" width="140" height="24" rx="5" fill="#161b22" stroke="#58a6ff"/>
+        <text x="340" y="107" text-anchor="middle" fill="#58a6ff" font-size="10">Aider</text>
+        <rect x="270" y="120" width="140" height="16" rx="4" fill="#161b22" stroke="#bc8cff"/>
+        <text x="340" y="132" text-anchor="middle" fill="#bc8cff" font-size="9">Roo Code / Cline</text>
+        <!-- IDE plugins -->
+        <rect x="470" y="20" width="180" height="120" rx="12" fill="rgba(88,166,255,.06)" stroke="#58a6ff" stroke-width="1.5"/>
+        <text x="560" y="48" text-anchor="middle" fill="#58a6ff" font-size="13" font-weight="700">🔌 IDE 插件</text>
+        <rect x="490" y="60" width="140" height="30" rx="6" fill="#161b22" stroke="#58a6ff"/>
+        <text x="560" y="80" text-anchor="middle" fill="#58a6ff" font-size="11" font-weight="600">Claude Code (VS Code)</text>
+        <rect x="490" y="98" width="140" height="28" rx="6" fill="#161b22" stroke="#58a6ff" stroke-dasharray="4"/>
+        <text x="560" y="117" text-anchor="middle" fill="#8b949e" font-size="10">JetBrains 插件</text>
+      </svg>
+      <div class="svg-caption">Claude 桌面生态：官方应用、开源替代、IDE 插件</div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>应用对比一览</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>应用</th><th>类型</th><th>支持模型</th><th>特色</th><th>推荐度</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Claude Desktop</strong></td><td>官方桌面端</td><td>Claude 全系列</td><td>原生体验、Artifacts、文件拖拽</td><td>⭐⭐⭐⭐⭐</td></tr>
+        <tr><td><strong>Claude Code (VS Code)</strong></td><td>IDE 插件</td><td>Claude 全系列</td><td>终端集成、代码感知、MCP</td><td>⭐⭐⭐⭐⭐</td></tr>
+        <tr><td><strong>OpenCode</strong></td><td>开源终端 TUI</td><td>多模型</td><td>轻量、支持 Claude/GPT/Gemini</td><td>⭐⭐⭐⭐</td></tr>
+        <tr><td><strong>Aider</strong></td><td>开源 CLI</td><td>多模型</td><td>Git 深度集成、Pair 编程</td><td>⭐⭐⭐⭐</td></tr>
+        <tr><td><strong>Roo Code</strong></td><td>VS Code 插件</td><td>多模型</td><td>可视化、MCP 支持</td><td>⭐⭐⭐⭐</td></tr>
+        <tr><td><strong>Cline</strong></td><td>VS Code 插件</td><td>多模型</td><td>自主 Agent、MCP 集成</td><td>⭐⭐⭐⭐</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="sub">
+    <h3>下载 Claude Desktop</h3>
+    <div class="tabs">
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(this,'dl-desktop')">macOS</button>
+        <button class="tab-btn" onclick="switchTab(this,'dl-desktop')">Windows</button>
+        <button class="tab-btn" onclick="switchTab(this,'dl-desktop')">Linux</button>
+      </div>
+      <div class="tab-panel active" data-tab-group="dl-desktop">
+        <div class="code-block"><div class="code-header"><span class="lang">bash — macOS 安装方式</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 方式 1：官网下载（推荐）
+# 访问 https://claude.ai/download 下载 macOS 版本
+
+# 方式 2：Homebrew 安装
+brew install --cask claude
+
+# 方式 3：网页版直接使用
+# 访问 https://claude.ai</div></div>
+      </div>
+      <div class="tab-panel" data-tab-group="dl-desktop">
+        <div class="code-block"><div class="code-header"><span class="lang">powershell — Windows 安装方式</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 方式 1：官网下载
+# 访问 https://claude.ai/download 下载 Windows 版本
+
+# 方式 2：winget 安装
+winget install Anthropic.Claude
+
+# 方式 3：网页版直接使用
+# 访问 https://claude.ai</div></div>
+      </div>
+      <div class="tab-panel" data-tab-group="dl-desktop">
+        <div class="code-block"><div class="code-header"><span class="lang">bash — Linux 安装方式</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># Linux 暂无官方桌面客户端
+# 推荐使用 Claude Code CLI：
+npm install -g @anthropic-ai/claude-code
+
+# 或使用网页版
+# 访问 https://claude.ai</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>⚠️ 认证方式说明</h3>
+    <p>Claude Desktop <strong>只支持 Anthropic 官方账号登录</strong>（OAuth），无法复用 CLI 的环境变量认证。如果你是通过 API Key 或第三方中转使用 Claude Code CLI，Claude Desktop 可能无法直接使用。</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>认证方式</th><th>Claude Code CLI</th><th>Claude Desktop</th><th>VS Code 插件</th></tr></thead>
+      <tbody>
+        <tr><td><code>claude login</code>（官方 OAuth）</td><td>✅</td><td>✅</td><td>✅</td></tr>
+        <tr><td><code>ANTHROPIC_API_KEY</code></td><td>✅</td><td>❌</td><td>⚠️ 部分</td></tr>
+        <tr><td><code>ANTHROPIC_AUTH_TOKEN</code> + 自定义 <code>BASE_URL</code></td><td>✅</td><td>❌</td><td>✅ 继承环境变量</td></tr>
+      </tbody>
+    </table></div>
+    <div class="warn"><strong>⚠️ 重要：</strong>如果你使用第三方 API 中转服务，推荐使用 <strong>VS Code 插件</strong>而非 Claude Desktop——VS Code 插件会继承终端环境变量，无需额外登录。</div>
+  </div>
+
+  <div class="sub">
+    <h3>🔑 无需登录的替代方案：VS Code 插件</h3>
+    <p>如果你已经在 CLI 中配置好了认证（如 API Key 或第三方中转），安装 VS Code 插件是最省事的选择，它会<strong>自动继承终端的环境变量</strong>：</p>
+    <div class="code-block"><div class="code-header"><span class="lang">bash — 安装 Claude Code VS Code 插件</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 方式 1：VS Code 命令面板安装
+# 1. 打开 VS Code
+# 2. Cmd+Shift+P → 输入 "Extensions: Install Extensions"
+# 3. 搜索 "Claude Code" → 点击安装
+
+# 方式 2：命令行一键安装
+code --install-extension claude-code
+
+# 方式 3：使用 Open VSX Registry（无需 Microsoft 账号）
+code --install-extension Claude.ai.claude-code</div></div>
+    <div class="tip"><strong>💡 好处：</strong>VS Code 插件拥有完整的 Claude Code 功能（文件操作、Shell 命令、MCP、Hooks 等），但提供更好的可视化界面，且自动复用你现有的 CLI 认证配置。</div>
+  </div>
+
+  <div class="sub">
+    <h3>开源替代方案</h3>
+    <div class="card">
+      <h4>🆓 OpenCode — 终端 TUI 客户端</h4>
+      <p>轻量级终端界面，支持 Claude、GPT、Gemini 等多模型切换，适合喜欢终端体验的开发者。</p>
+      <div class="code-block" style="margin:8px 0"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 安装 OpenCode
+go install github.com/opencode-ai/opencode@latest
+
+# 或使用 Homebrew
+brew install opencode-ai/tap/opencode
+
+# 启动
+opencode</div></div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <h4>🤝 Aider — AI 结对编程工具</h4>
+      <p>强大的 Git 集成和 AI 结对编程体验，支持几乎所有主流 AI 模型。</p>
+      <div class="code-block" style="margin:8px 0"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body">pip install aider-chat
+aider --model claude-3-5-sonnet</div></div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <h4>🦊 Roo Code / Cline — VS Code 插件</h4>
+      <p>在 VS Code 中提供自主 Agent 体验，支持 MCP 集成和多模型切换。</p>
+      <div class="code-block" style="margin:8px 0"><div class="code-header"><span class="lang">text</span><button class="copy-btn" onclick="copyCode(this)">复制</button></div><div class="code-body"># 在 VS Code 扩展商店搜索安装：
+# - "Roo Code" — 功能丰富的 AI 编程助手
+# - "Cline" — 自主 AI Agent 插件
+# - "Continue" — 开源 AI 代码助手</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CHEATSHEET ===================== -->
+<section class="section" id="cheatsheet">
+  <h2 class="section-title">📋 速查表</h2>
+  <div class="sub">
+    <div class="tabs">
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(this,'cs')">CLI 命令</button>
+        <button class="tab-btn" onclick="switchTab(this,'cs')">斜杠命令</button>
+        <button class="tab-btn" onclick="switchTab(this,'cs')">常用标志</button>
+        <button class="tab-btn" onclick="switchTab(this,'cs)">快捷键</button>
+      </div>
+      <div class="tab-panel active" data-tab-group="cs">
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>命令</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td><code>claude</code></td><td>启动交互会话</td></tr>
+            <tr><td><code>claude "query"</code></td><td>带提示启动会话</td></tr>
+            <tr><td><code>claude -p "q"</code></td><td>非交互打印模式</td></tr>
+            <tr><td><code>claude -c</code></td><td>继续上次对话</td></tr>
+            <tr><td><code>claude -r "name"</code></td><td>恢复指定会话</td></tr>
+            <tr><td><code>claude -n "name"</code></td><td>创建命名会话</td></tr>
+            <tr><td><code>claude update</code></td><td>更新 Claude Code</td></tr>
+            <tr><td><code>claude config</code></td><td>打开配置</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="tab-panel" data-tab-group="cs">
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>命令</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td><code>/help</code></td><td>帮助</td></tr>
+            <tr><td><code>/clear</code></td><td>清除会话</td></tr>
+            <tr><td><code>/compact</code></td><td>压缩上下文</td></tr>
+            <tr><td><code>/cost</code></td><td>查看费用</td></tr>
+            <tr><td><code>/init</code></td><td>初始化项目</td></tr>
+            <tr><td><code>/review</code></td><td>代码审查</td></tr>
+            <tr><td><code>/debug</code></td><td>调试模式</td></tr>
+            <tr><td><code>/loop</code></td><td>循环执行</td></tr>
+            <tr><td><code>/batch</code></td><td>批量变更</td></tr>
+            <tr><td><code>/simplify</code></td><td>简化代码</td></tr>
+            <tr><td><code>/resume</code></td><td>恢复历史会话</td></tr>
+            <tr><td><code>/rename</code></td><td>重命名会话</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="tab-panel" data-tab-group="cs">
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>标志</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td><code>-p, --print</code></td><td>打印模式</td></tr>
+            <tr><td><code>-c, --continue</code></td><td>继续对话</td></tr>
+            <tr><td><code>-r, --resume</code></td><td>恢复会话</td></tr>
+            <tr><td><code>--bare</code></td><td>精简模式</td></tr>
+            <tr><td><code>--max-turns N</code></td><td>限制轮数</td></tr>
+            <tr><td><code>--output-format</code></td><td>输出格式</td></tr>
+            <tr><td><code>--verbose</code></td><td>详细日志</td></tr>
+            <tr><td><code>--worktree</code></td><td>Git worktree</td></tr>
+            <tr><td><code>--append-system-prompt</code></td><td>追加系统提示词</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="tab-panel" data-tab-group="cs">
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>快捷键</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td><code>Esc</code></td><td>中断当前操作</td></tr>
+            <tr><td><code>Ctrl+C</code></td><td>取消 / 退出</td></tr>
+            <tr><td><code>Ctrl+O</code></td><td>切换详细模式</td></tr>
+            <tr><td><code>↑ / ↓</code></td><td>浏览历史输入</td></tr>
+            <tr><td><code>Tab</code></td><td>自动补全</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="section" id="faq">
+  <h2 class="section-title">❓ 常见问题</h2>
+  <div class="accordion">
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)"><span>Claude Code 会在未经同意的情况下修改我的代码吗？</span><span class="arrow">▶</span></div>
+      <div class="acc-body"><div class="acc-inner">
+        <p>不会。Claude Code 在执行文件修改、Shell 命令等操作前会请求你的许可。你可以通过 <code>--permission-mode</code> 调整权限级别，也可以用 Hooks 自动批准特定安全操作。</p>
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)"><span>如何节省 token 使用量？</span><span class="arrow">▶</span></div>
+      <div class="acc-body"><div class="acc-inner">
+        <p>使用 <code>/compact</code> 压缩会话上下文；使用 <code>--max-turns</code> 限制执行轮数；使用 <code>--bare</code> 跳过不必要的发现阶段；合理使用 CLAUDE.md 减少重复解释。</p>
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)"><span>CLAUDE.md 指令不被遵循怎么办？</span><span class="arrow">▶</span></div>
+      <div class="acc-body"><div class="acc-inner">
+        <p>1) 确认文件位置正确（项目根目录或 <code>.claude/CLAUDE.md</code>）；2) 使用 <code>/memory</code> 查看加载状态；3) 确保指令具体明确；4) 检查是否有冲突指令。</p>
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)"><span>如何在团队中共享配置？</span><span class="arrow">▶</span></div>
+      <div class="acc-body"><div class="acc-inner">
+        <p>将 <code>CLAUDE.md</code> 和 <code>.claude/</code> 目录纳入 Git 版本控制。团队成员拉取代码后即可共享项目规范、技能和钩子配置。个人偏好放在 <code>~/.claude/CLAUDE.md</code>。</p>
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)"><span>支持哪些 MCP 服务器？</span><span class="arrow">▶</span></div>
+      <div class="acc-body"><div class="acc-inner">
+        <p>官方支持的包括 Google Drive、Jira、Slack、PostgreSQL、Filesystem、GitHub 等。你也可以通过 MCP SDK 构建自定义服务器，任何能提供工具或资源的 HTTP/WebSocket 服务都可以接入。</p>
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head" onclick="toggleAcc(this)"><span>什么时候该用 YOLO 模式？有什么风险？</span><span class="arrow">▶</span></div>
+      <div class="acc-body"><div class="acc-inner">
+        <p>YOLO 模式适合在<strong>隔离环境</strong>（Docker 容器、虚拟机）中执行自动化任务，如批量重构、生成测试、CI/CD 流水线等。<strong>风险：</strong>AI 可能误删文件、执行危险命令、访问敏感数据。建议优先使用 allow/deny 精细规则，只在确信安全的环境下开启 YOLO。</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<script>
+// ===== Sidebar Navigation =====
+const navItems = document.querySelectorAll('.nav-item[data-target]');
+const allSections = document.querySelectorAll('.section, .hero');
+
+navItems.forEach(item => {
+  item.addEventListener('click', () => {
+    const el = document.getElementById(item.dataset.target);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
+  });
+});
+
+// ===== Active Section Highlight =====
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navItems.forEach(n => n.classList.remove('active'));
+      const a = document.querySelector('.nav-item[data-target="' + entry.target.id + '"]');
+      if (a) a.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+allSections.forEach(s => { if (s.id) observer.observe(s); });
+
+// ===== Progress Bar =====
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progressFill').style.width = (h > 0 ? window.scrollY / h * 100 : 0) + '%';
+  document.getElementById('scrollTopBtn').classList.toggle('visible', window.scrollY > 400);
+});
+
+// ===== Tabs =====
+function switchTab(btn, group) {
+  const bar = btn.parentElement;
+  bar.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const panels = bar.parentElement.querySelectorAll('.tab-panel[data-tab-group="' + group + '"]');
+  const idx = Array.from(bar.children).indexOf(btn);
+  panels.forEach((p, i) => p.classList.toggle('active', i === idx));
+}
+
+// ===== Accordion =====
+function toggleAcc(head) { head.parentElement.classList.toggle('open'); }
+
+// ===== Copy Code =====
+function copyCode(btn) {
+  const body = btn.closest('.code-block').querySelector('.code-body');
+  navigator.clipboard.writeText(body.textContent.trim()).then(() => {
+    btn.textContent = '已复制 ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '复制'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// ===== Mobile Sidebar =====
+function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+
+// ===== Search =====
+function filterNav(q) {
+  q = q.toLowerCase();
+  document.querySelectorAll('.nav-sec').forEach(sec => {
+    let hasVisible = false;
+    let next = sec.nextElementSibling;
+    while (next && !next.classList.contains('nav-sec')) {
+      if (next.classList.contains('nav-item')) {
+        const show = next.textContent.toLowerCase().includes(q);
+        next.style.display = show ? '' : 'none';
+        if (show) hasVisible = true;
+      }
+      next = next.nextElementSibling;
+    }
+    sec.style.display = hasVisible || !q ? '' : 'none';
+  });
+}
+</script>
+
+</div><!-- /content -->
+<div class="footer">Claude Code 学习教程 · 内容基于官方文档整理 · 2025</div>
+</div><!-- /main -->
+</div><!-- /app -->
+</html>
