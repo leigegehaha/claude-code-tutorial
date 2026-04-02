@@ -87,3 +87,13 @@ git clone https://github.com/leigegehaha/claude-code-tutorial.git
 # 直接用浏览器打开
 open index.html
 ```
+
+## 作者
+
+📚 **磊哥哥科技拆解室**
+
+本教程引用的开源代码和网页内容均已标注来源，版权归原作者所有。
+
+## 开源协议
+
+本项目采用 [Apache License 2.0](LICENSE) 开源协议。
